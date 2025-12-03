@@ -1,0 +1,910 @@
+{
+	"pokemon": [
+		{
+			"id": 1,
+			"name": "bulbasaur",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+			"flavor_text_yellow": "It can go for days without eating a single morsel. In the bulb on its back, it stores energy."
+		},
+		{
+			"id": 2,
+			"name": "ivysaur",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+			"flavor_text_yellow": "The bulb on its back grows by drawing energy. It gives off an aroma when it is ready to bloom."
+		},
+		{
+			"id": 3,
+			"name": "venusaur",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+			"flavor_text_yellow": "The flower on its back catches the sun's rays. The sunlight is then absorbed and used for energy."
+		},
+		{
+			"id": 4,
+			"name": "charmander",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+			"flavor_text_yellow": "The flame at the tip of its tail makes a sound as it burns. You can only hear it in quiet places."
+		},
+		{
+			"id": 5,
+			"name": "charmeleon",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+			"flavor_text_yellow": "Tough fights could excite this POKéMON. When excited, it may blow out bluish- white flames."
+		},
+		{
+			"id": 6,
+			"name": "charizard",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+			"flavor_text_yellow": "When expelling a blast of super hot fire, the red flame at the tip of its tail burns more intensely."
+		},
+		{
+			"id": 7,
+			"name": "squirtle",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+			"flavor_text_yellow": "Shoots water at prey while in the water. Withdraws into its shell when in danger."
+		},
+		{
+			"id": 8,
+			"name": "wartortle",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+			"flavor_text_yellow": "When tapped, this POKéMON will pull in its head, but its tail will still stick out a little bit."
+		},
+		{
+			"id": 9,
+			"name": "blastoise",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+			"flavor_text_yellow": "Once it takes aim at its enemy, it blasts out water with even more force than a fire hose."
+		},
+		{
+			"id": 10,
+			"name": "caterpie",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+			"flavor_text_yellow": "If you touch the feeler on top of its head, it will release a horrible stink to protect itself."
+		},
+		{
+			"id": 11,
+			"name": "metapod",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+			"flavor_text_yellow": "Hardens its shell to protect itself. However, a large impact may cause it to pop out of its shell."
+		},
+		{
+			"id": 12,
+			"name": "butterfree",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+			"flavor_text_yellow": "Its wings, covered with poisonous powders, repel water. This allows it to fly in the rain."
+		},
+		{
+			"id": 13,
+			"name": "weedle",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/13.png",
+			"flavor_text_yellow": "Beware of the sharp stinger on its head. It hides in grass and bushes where it eats leaves."
+		},
+		{
+			"id": 14,
+			"name": "kakuna",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/14.png",
+			"flavor_text_yellow": "Able to move only slightly. When endangered, it may stick out its stinger and poison its enemy."
+		},
+		{
+			"id": 15,
+			"name": "beedrill",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/15.png",
+			"flavor_text_yellow": "It has 3 poisonous stingers on its forelegs and its tail. They are used to jab its enemy repeatedly."
+		},
+		{
+			"id": 16,
+			"name": "pidgey",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/16.png",
+			"flavor_text_yellow": "Very docile. If attacked, it will often kick up sand to protect itself rather than fight back."
+		},
+		{
+			"id": 17,
+			"name": "pidgeotto",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
+			"flavor_text_yellow": "This POKéMON is full of vitality. It constantly flies around its large territory in search of prey."
+		},
+		{
+			"id": 18,
+			"name": "pidgeot",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/18.png",
+			"flavor_text_yellow": "This POKéMON flies at Mach 2 speed, seeking prey. Its large talons are feared as wicked weapons."
+		},
+		{
+			"id": 19,
+			"name": "rattata",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/19.png",
+			"flavor_text_yellow": "Will chew on any­ thing with its fangs. If you see one, it is certain that 40 more live in the area."
+		},
+		{
+			"id": 20,
+			"name": "raticate",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/20.png",
+			"flavor_text_yellow": "Its hind feet are webbed. They act as flippers, so it can swim in rivers and hunt for prey."
+		},
+		{
+			"id": 21,
+			"name": "spearow",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/21.png",
+			"flavor_text_yellow": "Inept at flying high. However, it can fly around very fast to protect its ter­ ritory."
+		},
+		{
+			"id": 22,
+			"name": "fearow",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/22.png",
+			"flavor_text_yellow": "A POKéMON that dates back many years. If it senses danger, it flies high and away, instantly."
+		},
+		{
+			"id": 23,
+			"name": "ekans",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/23.png",
+			"flavor_text_yellow": "The older it gets, the longer it grows. At night, it wraps its long body around tree branches to rest."
+		},
+		{
+			"id": 24,
+			"name": "arbok",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/24.png",
+			"flavor_text_yellow": "The frightening patterns on its belly have been studied. Six variations have been confirmed."
+		},
+		{
+			"id": 25,
+			"name": "pikachu",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+			"flavor_text_yellow": "It keeps its tail raised to monitor its surroundings. If you yank its tail, it will try to bite you."
+		},
+		{
+			"id": 26,
+			"name": "raichu",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+			"flavor_text_yellow": "When electricity builds up inside its body, it becomes feisty. It also glows in the dark."
+		},
+		{
+			"id": 27,
+			"name": "sandshrew",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/27.png",
+			"flavor_text_yellow": "Its body is dry. When it gets cold at night, its hide is said to become coated with a fine dew."
+		},
+		{
+			"id": 28,
+			"name": "sandslash",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/28.png",
+			"flavor_text_yellow": "It is skilled at slashing enemies with its claws. If broken, they start to grow back in a day."
+		},
+		{
+			"id": 29,
+			"name": "nidoran-f",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/29.png",
+			"flavor_text_yellow": "A mild-mannered POKéMON that does not like to fight. Beware, its small horns secrete venom."
+		},
+		{
+			"id": 30,
+			"name": "nidorina",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/30.png",
+			"flavor_text_yellow": "When resting deep in its burrow, its thorns always retract. This is proof that it is relaxed."
+		},
+		{
+			"id": 31,
+			"name": "nidoqueen",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/31.png",
+			"flavor_text_yellow": "Tough scales cover the sturdy body of this POKéMON. It appears that the scales grow in cycles."
+		},
+		{
+			"id": 32,
+			"name": "nidoran-m",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/32.png",
+			"flavor_text_yellow": "Its large ears are always kept upright. If it senses danger, it will attack with a poisonous sting."
+		},
+		{
+			"id": 33,
+			"name": "nidorino",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/33.png",
+			"flavor_text_yellow": "Its horns contain venom. If they are stabbed into an enemy, the impact makes the poison leak out."
+		},
+		{
+			"id": 34,
+			"name": "nidoking",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/34.png",
+			"flavor_text_yellow": "Its steel-like hide adds to its powerful tackle. Its horns are so hard, they can pierce a diamond."
+		},
+		{
+			"id": 35,
+			"name": "clefairy",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/35.png",
+			"flavor_text_yellow": "Adored for their cute looks and playfulness. They are thought to be rare, as they do not appear often."
+		},
+		{
+			"id": 36,
+			"name": "clefable",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/36.png",
+			"flavor_text_yellow": "They appear to be very protective of their own world. It is a kind of fairy, rarely seen by people."
+		},
+		{
+			"id": 37,
+			"name": "vulpix",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+			"flavor_text_yellow": "Both its fur and its tails are beautiful. As it grows, the tails split and form more tails."
+		},
+		{
+			"id": 38,
+			"name": "ninetales",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+			"flavor_text_yellow": "According to an enduring legend, 9 noble saints were united and reincarnated as this POKéMON."
+		},
+		{
+			"id": 39,
+			"name": "jigglypuff",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png",
+			"flavor_text_yellow": "Uses its alluring eyes to enrapture its foe. It then sings a pleasing melody that lulls the foe to sleep."
+		},
+		{
+			"id": 40,
+			"name": "wigglytuff",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/40.png",
+			"flavor_text_yellow": "Its body is full of elasticity. By inhaling deeply, it can continue to inflate itself without limit."
+		},
+		{
+			"id": 41,
+			"name": "zubat",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/41.png",
+			"flavor_text_yellow": "Emits ultrasonic cries while it flies. They act as a sonar used to check for ob­ jects in its way."
+		},
+		{
+			"id": 42,
+			"name": "golbat",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/42.png",
+			"flavor_text_yellow": "It attacks in a stealthy manner, without warning. Its sharp fangs are used to bite and suck blood."
+		},
+		{
+			"id": 43,
+			"name": "oddish",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+			"flavor_text_yellow": "It may be mistaken for a clump of weeds. If you try to yank it out of the ground, it shrieks horribly."
+		},
+		{
+			"id": 44,
+			"name": "gloom",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+			"flavor_text_yellow": "Smells incredibly foul! However, around 1 out of 1,000 people enjoy sniffing its nose- bending stink."
+		},
+		{
+			"id": 45,
+			"name": "vileplume",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+			"flavor_text_yellow": "Flaps its broad flower petals to scatter its poisonous pollen. The flapping sound is very loud."
+		},
+		{
+			"id": 46,
+			"name": "paras",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/46.png",
+			"flavor_text_yellow": "Burrows under the ground to gnaw on tree roots. The mushrooms on its back absorb most of the nutrition."
+		},
+		{
+			"id": 47,
+			"name": "parasect",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/47.png",
+			"flavor_text_yellow": "The bug host is drained of energy by the mushrooms on its back. They appear to do all the thinking."
+		},
+		{
+			"id": 48,
+			"name": "venonat",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/48.png",
+			"flavor_text_yellow": "Its large eyes act as radars. In a bright place, you can see that they are clusters of many tiny eyes."
+		},
+		{
+			"id": 49,
+			"name": "venomoth",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png",
+			"flavor_text_yellow": "The powdery scales on its wings are hard to remove. They also contain poison that leaks out on contact."
+		},
+		{
+			"id": 50,
+			"name": "diglett",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+			"flavor_text_yellow": "It prefers dark places. It spends most of its time underground, though it may pop up in caves."
+		},
+		{
+			"id": 51,
+			"name": "dugtrio",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+			"flavor_text_yellow": "A team of triplets that can burrow over 60 MPH. Due to this, some people think it's an earthquake."
+		},
+		{
+			"id": 52,
+			"name": "meowth",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+			"flavor_text_yellow": "Appears to be more active at night. It loves round and shiny things. It can't stop from picking them up."
+		},
+		{
+			"id": 53,
+			"name": "persian",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+			"flavor_text_yellow": "The gem in its forehead glows on its own! It walks with all the grace and elegance of a proud queen."
+		},
+		{
+			"id": 54,
+			"name": "psyduck",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png",
+			"flavor_text_yellow": "Always tormented by headaches. It uses psychic powers, but it is not known if it intends to do so."
+		},
+		{
+			"id": 55,
+			"name": "golduck",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png",
+			"flavor_text_yellow": "Its slim and long limbs end in broad flippers. They are used for swim­ ming gracefully in lakes."
+		},
+		{
+			"id": 56,
+			"name": "mankey",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/56.png",
+			"flavor_text_yellow": "An agile POKéMON that lives in trees. It angers easily and will not hesitate to attack anything."
+		},
+		{
+			"id": 57,
+			"name": "primeape",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/57.png",
+			"flavor_text_yellow": "It stops being angry only when nobody else is around. To view this moment is very difficult."
+		},
+		{
+			"id": 58,
+			"name": "growlithe",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/58.png",
+			"flavor_text_yellow": "A POKéMON with a friendly nature. However, it will bark fiercely at anything invading its territory."
+		},
+		{
+			"id": 59,
+			"name": "arcanine",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png",
+			"flavor_text_yellow": "A legendary POKé­ MON in China. Many people are charmed by its grace and beauty while running."
+		},
+		{
+			"id": 60,
+			"name": "poliwag",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/60.png",
+			"flavor_text_yellow": "The direction of the spiral on the belly differs by area. It is more adept at swimming than walking."
+		},
+		{
+			"id": 61,
+			"name": "poliwhirl",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/61.png",
+			"flavor_text_yellow": "Under attack, it uses its belly  spiral to put the foe to sleep. It then makes its escape."
+		},
+		{
+			"id": 62,
+			"name": "poliwrath",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/62.png",
+			"flavor_text_yellow": "Swims powerfully using all the muscles in its body. It can even overtake champion swimmers."
+		},
+		{
+			"id": 63,
+			"name": "abra",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png",
+			"flavor_text_yellow": "Sleeps 18 hours a day. If it senses danger, it will teleport itself to safety even as it sleeps."
+		},
+		{
+			"id": 64,
+			"name": "kadabra",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/64.png",
+			"flavor_text_yellow": "Many odd things happen if this POKéMON is close by. For example, it makes clocks run backwards."
+		},
+		{
+			"id": 65,
+			"name": "alakazam",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png",
+			"flavor_text_yellow": "A POKéMON that can memorize anything. It never forgets what it learns-- that's why this POKéMON is smart."
+		},
+		{
+			"id": 66,
+			"name": "machop",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png",
+			"flavor_text_yellow": "Very powerful in spite of its small size. Its mastery of many types of martial arts makes it very tough."
+		},
+		{
+			"id": 67,
+			"name": "machoke",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png",
+			"flavor_text_yellow": "The belt around its waist holds back its energy. Without it, this POKéMON would be unstoppable."
+		},
+		{
+			"id": 68,
+			"name": "machamp",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/68.png",
+			"flavor_text_yellow": "One arm alone can move mountains. Using all four arms, this POKéMON fires off awesome punches."
+		},
+		{
+			"id": 69,
+			"name": "bellsprout",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/69.png",
+			"flavor_text_yellow": "Prefers hot and humid places. It ensnares tiny insects with its vines and devours them."
+		},
+		{
+			"id": 70,
+			"name": "weepinbell",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/70.png",
+			"flavor_text_yellow": "When hungry, it swallows anything that moves. Its hapless prey is melted inside by strong acids."
+		},
+		{
+			"id": 71,
+			"name": "victreebel",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/71.png",
+			"flavor_text_yellow": "Lures prey with the sweet aroma of honey. Swallowed whole, the prey is melted in a day, bones and all."
+		},
+		{
+			"id": 72,
+			"name": "tentacool",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/72.png",
+			"flavor_text_yellow": "It can sometimes be found all dry and shriveled up on a beach. Toss it back into the sea to revive it."
+		},
+		{
+			"id": 73,
+			"name": "tentacruel",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/73.png",
+			"flavor_text_yellow": "Its 80 tentacles can stretch and contract freely. They wrap around prey and weaken it with poison."
+		},
+		{
+			"id": 74,
+			"name": "geodude",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/74.png",
+			"flavor_text_yellow": "Commonly found near mountain trails, etc. If you step on one by accident, it gets angry."
+		},
+		{
+			"id": 75,
+			"name": "graveler",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/75.png",
+			"flavor_text_yellow": "Often seen rolling down mountain trails. Obstacles are just things to roll straight over, not avoid."
+		},
+		{
+			"id": 76,
+			"name": "golem",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/76.png",
+			"flavor_text_yellow": "Once it sheds its skin, its body turns tender and whitish. Its hide hardens when it's exposed to air."
+		},
+		{
+			"id": 77,
+			"name": "ponyta",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/77.png",
+			"flavor_text_yellow": "Capable of jumping incredibly high. Its hooves and sturdy legs absorb the impact of a hard landing."
+		},
+		{
+			"id": 78,
+			"name": "rapidash",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/78.png",
+			"flavor_text_yellow": "Just loves to run. If it sees some­ thing faster than itself, it will give chase at top speed."
+		},
+		{
+			"id": 79,
+			"name": "slowpoke",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/79.png",
+			"flavor_text_yellow": "Incredibly slow and sluggish. It is quite content to loll about without worrying about the time."
+		},
+		{
+			"id": 80,
+			"name": "slowbro",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/80.png",
+			"flavor_text_yellow": "Lives lazily by the sea. If the SHELLDER on its tail comes off, it becomes a SLOWPOKE again."
+		},
+		{
+			"id": 81,
+			"name": "magnemite",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png",
+			"flavor_text_yellow": "It is born with the ability to defy gravity. It floats in air on powerful electro­ magnetic waves."
+		},
+		{
+			"id": 82,
+			"name": "magneton",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/82.png",
+			"flavor_text_yellow": "Generates strange radio signals. It raises the tem­ perature by 3.6F degrees within 3,300 feet."
+		},
+		{
+			"id": 83,
+			"name": "farfetchd",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/83.png",
+			"flavor_text_yellow": "Lives where reedy plants grow. They are rarely seen, so it's thought their numbers are decreasing."
+		},
+		{
+			"id": 84,
+			"name": "doduo",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/84.png",
+			"flavor_text_yellow": "Its short wings make flying dif­ ficult. Instead, this POKéMON runs at high speed on developed legs."
+		},
+		{
+			"id": 85,
+			"name": "dodrio",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/85.png",
+			"flavor_text_yellow": "One of DODUO's 2 heads splits to form a unique species. It runs close to 40 MPH in prairies."
+		},
+		{
+			"id": 86,
+			"name": "seel",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/86.png",
+			"flavor_text_yellow": "Loves freezing cold conditions. Relishes swimming in a frigid cli­ mate of around 14F degrees."
+		},
+		{
+			"id": 87,
+			"name": "dewgong",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/87.png",
+			"flavor_text_yellow": "Its entire body is a snowy-white. Unharmed by even intense cold, it swims powerfully in icy waters."
+		},
+		{
+			"id": 88,
+			"name": "grimer",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/88.png",
+			"flavor_text_yellow": "Made of hardened sludge. It smells too putrid to touch. Even weeds won't grow in its path."
+		},
+		{
+			"id": 89,
+			"name": "muk",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/89.png",
+			"flavor_text_yellow": "Smells so awful, it can cause fainting. Through degeneration, it lost its sense of smell."
+		},
+		{
+			"id": 90,
+			"name": "shellder",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/90.png",
+			"flavor_text_yellow": "The shell can withstand any attack. However, when it is open, the tender body is exposed."
+		},
+		{
+			"id": 91,
+			"name": "cloyster",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/91.png",
+			"flavor_text_yellow": "For protection, it uses its harder- than-diamonds shell. It also shoots spikes from the shell."
+		},
+		{
+			"id": 92,
+			"name": "gastly",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/92.png",
+			"flavor_text_yellow": "Said to appear in decrepit, deserted buildings. It has no real shape as it appears to be made of a gas."
+		},
+		{
+			"id": 93,
+			"name": "haunter",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/93.png",
+			"flavor_text_yellow": "By licking, it saps the victim's life. It causes shaking that won't stop until the victim's demise."
+		},
+		{
+			"id": 94,
+			"name": "gengar",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
+			"flavor_text_yellow": "A GENGAR is close by if you feel a sudden chill. It may be trying to lay a curse on you."
+		},
+		{
+			"id": 95,
+			"name": "onix",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/95.png",
+			"flavor_text_yellow": "Burrows at high speed in search of food. The tunnels it leaves are used as homes by DIGLETTs."
+		},
+		{
+			"id": 96,
+			"name": "drowzee",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/96.png",
+			"flavor_text_yellow": "If you sleep by it all the time, it will sometimes show you dreams it has eaten in the past."
+		},
+		{
+			"id": 97,
+			"name": "hypno",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/97.png",
+			"flavor_text_yellow": "Avoid eye contact if you come across one. It will try to put you to sleep by using its pendulum."
+		},
+		{
+			"id": 98,
+			"name": "krabby",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/98.png",
+			"flavor_text_yellow": "Its pincers are superb weapons. They sometimes break off during battle, but they grow back fast."
+		},
+		{
+			"id": 99,
+			"name": "kingler",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/99.png",
+			"flavor_text_yellow": "One claw grew massively and as hard as steel. It has 10,000-HP strength. However, it is too heavy."
+		},
+		{
+			"id": 100,
+			"name": "voltorb",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/100.png",
+			"flavor_text_yellow": "It is said to camouflage itself as a POKé BALL. It will self-destruct with very little stimulus."
+		},
+		{
+			"id": 101,
+			"name": "electrode",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/101.png",
+			"flavor_text_yellow": "Stores electrical energy inside its body. Even the slightest shock could trigger a huge explosion."
+		},
+		{
+			"id": 102,
+			"name": "exeggcute",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/102.png",
+			"flavor_text_yellow": "The heads attract each other and spin around. There must be 6 heads for it to maintain balance."
+		},
+		{
+			"id": 103,
+			"name": "exeggutor",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/103.png",
+			"flavor_text_yellow": "Its cries are very noisy. This is because each of the 3 heads thinks about whatever it likes."
+		},
+		{
+			"id": 104,
+			"name": "cubone",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/104.png",
+			"flavor_text_yellow": "Wears the skull of its deceased mother. Its cries echo inside the skull and come out as a sad melody."
+		},
+		{
+			"id": 105,
+			"name": "marowak",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/105.png",
+			"flavor_text_yellow": "Small and weak, this POKéMON is adept with its bone club. It has grown more vicious over the ages."
+		},
+		{
+			"id": 106,
+			"name": "hitmonlee",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/106.png",
+			"flavor_text_yellow": "When kicking, the sole of its foot turns as hard as a diamond on im­ pact and destroys its enemy."
+		},
+		{
+			"id": 107,
+			"name": "hitmonchan",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/107.png",
+			"flavor_text_yellow": "Punches in cork­ screw fashion. It can punch its way through a concrete wall in the same way as a drill."
+		},
+		{
+			"id": 108,
+			"name": "lickitung",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/108.png",
+			"flavor_text_yellow": "Its tongue spans almost 7 feet and moves more freely than its forelegs. Its licks can cause paralysis."
+		},
+		{
+			"id": 109,
+			"name": "koffing",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/109.png",
+			"flavor_text_yellow": "In hot places, its internal gases could expand and explode without any warning. Be very careful!"
+		},
+		{
+			"id": 110,
+			"name": "weezing",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/110.png",
+			"flavor_text_yellow": "It lives and grows by absorbing dust, germs and poison gases that are contained in toxic waste and garbage."
+		},
+		{
+			"id": 111,
+			"name": "rhyhorn",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/111.png",
+			"flavor_text_yellow": "A POKéMON with a one-track mind. Once it charges,  it won't stop running until it falls asleep."
+		},
+		{
+			"id": 112,
+			"name": "rhydon",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/112.png",
+			"flavor_text_yellow": "Walks on its hind legs. Shows signs of intelligence. Its armor-like hide even repels molten lava."
+		},
+		{
+			"id": 113,
+			"name": "chansey",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/113.png",
+			"flavor_text_yellow": "A gentle and kind­ hearted POKéMON that shares its nutritious eggs if it sees an injured POKéMON."
+		},
+		{
+			"id": 114,
+			"name": "tangela",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/114.png",
+			"flavor_text_yellow": "Its identity is obscured by masses of thick, blue vines. The vines are said to never stop growing."
+		},
+		{
+			"id": 115,
+			"name": "kangaskhan",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/115.png",
+			"flavor_text_yellow": "Raises its young in its belly pouch. Won't run from any fight to keep its young protected."
+		},
+		{
+			"id": 116,
+			"name": "horsea",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/116.png",
+			"flavor_text_yellow": "If it senses any danger, it will vigorously spray water or a special type of ink from its mouth."
+		},
+		{
+			"id": 117,
+			"name": "seadra",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/117.png",
+			"flavor_text_yellow": "Touching the back fin causes numb­ ness. It hooks its tail to coral to stay in place while sleeping."
+		},
+		{
+			"id": 118,
+			"name": "goldeen",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/118.png",
+			"flavor_text_yellow": "When it is time for them to lay eggs, they can be seen swimming up rivers and falls in large groups."
+		},
+		{
+			"id": 119,
+			"name": "seaking",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/119.png",
+			"flavor_text_yellow": "It is the male's job to make a nest by carving out boulders in a stream using the horn on its head."
+		},
+		{
+			"id": 120,
+			"name": "staryu",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/120.png",
+			"flavor_text_yellow": "As long as the center section is unharmed, it can grow back fully even if it is chopped to bits."
+		},
+		{
+			"id": 121,
+			"name": "starmie",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/121.png",
+			"flavor_text_yellow": "The center section is named the core. People think it is communicating when it glows in 7 colors."
+		},
+		{
+			"id": 122,
+			"name": "mr-mime",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/122.png",
+			"flavor_text_yellow": "Always practices its pantomime act. It makes enemies believe something exists that really doesn't."
+		},
+		{
+			"id": 123,
+			"name": "scyther",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png",
+			"flavor_text_yellow": "Leaps out of tall grass and slices prey with its scythes. The move­ ment looks like that of a ninja."
+		},
+		{
+			"id": 124,
+			"name": "jynx",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/124.png",
+			"flavor_text_yellow": "Appears to move to a rhythm of its own, as if it were dancing. It wiggles its hips as it walks."
+		},
+		{
+			"id": 125,
+			"name": "electabuzz",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/125.png",
+			"flavor_text_yellow": "If a major power outage occurs, it is certain that this POKéMON has eaten electricity at a power plant."
+		},
+		{
+			"id": 126,
+			"name": "magmar",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/126.png",
+			"flavor_text_yellow": "Born in an active volcano. Its body is always cloaked in flames, so it looks like a big ball of fire."
+		},
+		{
+			"id": 127,
+			"name": "pinsir",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/127.png",
+			"flavor_text_yellow": "Grips its prey in its pincers and squeezes hard! It can't move if it's cold, so it lives in warm places."
+		},
+		{
+			"id": 128,
+			"name": "tauros",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/128.png",
+			"flavor_text_yellow": "A rowdy POKéMON with a lot of stamina. Once running, it won't stop until it hits something."
+		},
+		{
+			"id": 129,
+			"name": "magikarp",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/129.png",
+			"flavor_text_yellow": "Famous for being very unreliable. It can be found swimming in seas, lakes, rivers and shallow puddles."
+		},
+		{
+			"id": 130,
+			"name": "gyarados",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png",
+			"flavor_text_yellow": "Brutally vicious and enormously destructive. Known for totally destroying cities in ancient times."
+		},
+		{
+			"id": 131,
+			"name": "lapras",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/131.png",
+			"flavor_text_yellow": "A gentle soul that can read the minds of people. It can ferry people across the sea on its back."
+		},
+		{
+			"id": 132,
+			"name": "ditto",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+			"flavor_text_yellow": "When it spots an enemy, its body transfigures into an almost perfect copy of its oppo­ nent."
+		},
+		{
+			"id": 133,
+			"name": "eevee",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+			"flavor_text_yellow": "Its genetic code is unstable, so it could evolve in a variety of ways. There are only a few alive."
+		},
+		{
+			"id": 134,
+			"name": "vaporeon",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
+			"flavor_text_yellow": "Its cell structure is similar to water molecules. It will melt away and become invis­ ible in water."
+		},
+		{
+			"id": 135,
+			"name": "jolteon",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
+			"flavor_text_yellow": "A sensitive POKé­ MON that easily becomes sad or angry. Every time its mood changes, it charges power."
+		},
+		{
+			"id": 136,
+			"name": "flareon",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
+			"flavor_text_yellow": "It has a flame chamber inside its body. It inhales, then blows out fire that is over 3,000F degrees."
+		},
+		{
+			"id": 137,
+			"name": "porygon",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/137.png",
+			"flavor_text_yellow": "The only POKéMON people anticipate can fly into space. None has managed the feat yet, however."
+		},
+		{
+			"id": 138,
+			"name": "omanyte",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/138.png",
+			"flavor_text_yellow": "An ancient POKéMON that was recovered from a fossil. It swims by cleverly twisting its 10 tentacles about."
+		},
+		{
+			"id": 139,
+			"name": "omastar",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/139.png",
+			"flavor_text_yellow": "Sharp beaks ring its mouth. Its shell was too big for it to move freely, so it became extinct."
+		},
+		{
+			"id": 140,
+			"name": "kabuto",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/140.png",
+			"flavor_text_yellow": "A POKéMON that was recovered from a fossil. It uses the eyes on its back while hiding on the sea floor."
+		},
+		{
+			"id": 141,
+			"name": "kabutops",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/141.png",
+			"flavor_text_yellow": "A slim and fast swimmer. It slices its prey with its sharp sickles and drinks the body fluids."
+		},
+		{
+			"id": 142,
+			"name": "aerodactyl",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/142.png",
+			"flavor_text_yellow": "A savage POKéMON that died out in ancient times. It was resurrected using DNA taken from amber."
+		},
+		{
+			"id": 143,
+			"name": "snorlax",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png",
+			"flavor_text_yellow": "Will eat anything, even if the food happens to be a little moldy. It never gets an upset stomach."
+		},
+		{
+			"id": 144,
+			"name": "articuno",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/144.png",
+			"flavor_text_yellow": "A legendary bird POKéMON. It freezes water that is contained in winter air and makes it snow."
+		},
+		{
+			"id": 145,
+			"name": "zapdos",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/145.png",
+			"flavor_text_yellow": "This legendary bird POKéMON is said to appear when the sky turns dark and lightning showers down."
+		},
+		{
+			"id": 146,
+			"name": "moltres",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/146.png",
+			"flavor_text_yellow": "A legendary bird POKéMON. As it flaps its flaming wings, even the night sky will turn red."
+		},
+		{
+			"id": 147,
+			"name": "dratini",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/147.png",
+			"flavor_text_yellow": "The existence of this mythical POKéMON was only recently confirmed by a fisherman who caught one."
+		},
+		{
+			"id": 148,
+			"name": "dragonair",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/148.png",
+			"flavor_text_yellow": "According to a witness, its body was surrounded by a strange aura that gave it a mystical look."
+		},
+		{
+			"id": 149,
+			"name": "dragonite",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png",
+			"flavor_text_yellow": "It is said that this POKéMON lives somewhere in the sea and that it flies. However, it is only a rumor."
+		},
+		{
+			"id": 150,
+			"name": "mewtwo",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png",
+			"flavor_text_yellow": "Its DNA is almost the same as MEW's. However, its size and disposition are vastly dif­ ferent."
+		},
+		{
+			"id": 151,
+			"name": "mew",
+			"official_artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png",
+			"flavor_text_yellow": "When viewed through a micro­ scope, this POKéMON's short, fine, delicate hair can be seen."
+		}
+	]
+}
