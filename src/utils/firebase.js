@@ -10,7 +10,7 @@ var firebaseConfig = {
 	authDomain: import.meta.env.VITE_AUTH_DOMAIN,
 	databaseURL: import.meta.env.VITE_DATABASE_URL,
 	projectId: import.meta.env.VITE_PROJECT_ID,
-	storageBucket: "PROJECT_ID.firebasestorage.app",
+	storageBucket: "pokedex-pwa-e0104.firebasestorage.app",
 	messagingSenderId: "982482705222",
 	appId: "1:982482705222:web:10c7745f456e52cc37a347",
 };
