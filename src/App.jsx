@@ -43,8 +43,8 @@ function App() {
       {/* <Route element={<ProtectedRoute />}> */}
       {/* <Route element={<MainLayout />}> */}
       <Route index element={<Home />} />
-      <Route path="/Catch" element={<CatchPage />} />
-      <Route path="/Pokedex" element={<PokedexPage />} />
+      <Route path="/catch" element={<CatchPage />} />
+      <Route path="/pokedex" element={<PokedexPage />} />
       {/* </Route> */}
       {/* </Route> */}
     </Routes>
