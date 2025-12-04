@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
+import supabase from "./../utils/supabase";
 
 const Auth = createContext();
 
@@ -9,9 +10,9 @@ export const AuthContext = ({ children }) => {
 	useEffect(() => {
 		async function fetchUser() {
 			try {
-				const response = await account.get();
-				const session = await account.listSessions();
-				setUser(response);
+				const { data, error } = await supabase.auth.getSession();
+				if (error) throw error;
+				setUser(data.session.user);
 			} catch (err) {
 				setUser(null);
 				console.log("No active session:", err.message);
@@ -22,34 +23,37 @@ export const AuthContext = ({ children }) => {
 		fetchUser();
 	}, []);
 
-	async function login(email, password) {
-		const response = await account.createEmailPasswordSession(email, password);
-		setUser(response);
-	}
-	async function logout() {
-		await account.deleteSession("current").then(
-			() => {
-				setUser(null);
-				console.log("User logged out");
-			},
-			(err) => {
-				console.log(err);
-			}
-		);
+	async function signInWithEmail(email, password) {
+		const { data, error } = await supabase.auth.signInWithPassword({
+			email: email,
+			password: password,
+		});
+		if (error) {
+			console.error("Error signing in:", error);
+		} else {
+			setUser(data.user);
+		}
 	}
 
-	async function signup(email, password, name) {
-		console.log(email, password, name);
-		try {
-			await account.create(ID.unique(), email, password, name);
-			console.log("User created");
-		} catch (err) {
-			console.error(err);
+	async function signOut() {
+		const { error } = await supabase.auth.signOut();
+		if (error) {
+			console.error("Error signing out:", error);
+		}
+	}
+
+	async function signUpNewUser(email, password) {
+		const { data, error } = await supabase.auth.signUp({
+			email: email,
+			password: password,
+		});
+		if (error) {
+			console.error("Error signing up:", error);
 		}
 	}
 
 	return (
-		<Auth value={{ user, login, logout, signup }}>
+		<Auth value={{ user, signInWithEmail, signOut, signUpNewUser }}>
 			{isLoading ? <div>Loading...</div> : children}
 		</Auth>
 	);

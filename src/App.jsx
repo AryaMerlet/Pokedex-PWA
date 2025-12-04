@@ -10,45 +10,42 @@ import LoginPage from "./pages/login";
 import SignupPage from "./pages/signup";
 // import MainLayout from "./components/mainLayout";
 import "./App.css";
-import supabase from './utils/supabase'
-
+import supabase from "./utils/supabase";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [pokemons, setPokemons] = useState([])
+	const [count, setCount] = useState(0);
+	const [pokemons, setPokemons] = useState([]);
 
-  useEffect(() => {
-    async function getPokemons() {
-      const { data, error } = await supabase.from('pokemons').select('*')
+	useEffect(() => {
+		async function getPokemons() {
+			const { data, error } = await supabase.from("pokemons").select("*");
 
-      if (error) {
-        console.error('Error fetching pokemons:', error)
-        return
-      }
-      console.log(data)
+			if (error) {
+				console.error("Error fetching pokemons:", error);
+				return;
+			}
+			console.log(data);
+		}
 
-    }
+		getPokemons();
+	}, []);
 
-    getPokemons()
-  }, [])
+	return (
+		<Routes>
+			{/* === Pages publiques === */}
+			<Route path="/login" element={<LoginPage />} />
+			<Route path="/signup" element={<SignupPage />} />
 
-
-  return (
-    <Routes>
-      {/* === Pages publiques === */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-
-      {/* === Pages protégées === */}
-      {/* <Route element={<ProtectedRoute />}> */}
-      {/* <Route element={<MainLayout />}> */}
-      <Route index element={<Home />} />
-      <Route path="/catch" element={<CatchPage />} />
-      <Route path="/pokedex" element={<PokedexPage />} />
-      {/* </Route> */}
-      {/* </Route> */}
-    </Routes>
-  )
+			{/* === Pages protégées === */}
+			<Route element={<ProtectedRoute />}>
+				{/* <Route element={<MainLayout />}> */}
+				<Route index element={<Home />} />
+				<Route path="/catch" element={<CatchPage />} />
+				<Route path="/pokedex" element={<PokedexPage />} />
+				{/* </Route> */}
+			</Route>
+		</Routes>
+	);
 }
 
 export default App;
