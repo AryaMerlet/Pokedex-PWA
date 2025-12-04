@@ -1,10 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import supabase from './utils/supabase'
+
 
 function App() {
   const [count, setCount] = useState(0)
+  const [pokemons, setPokemons] = useState([])
+
+  useEffect(() => {
+    async function getPokemons() {
+      const { data, error } = await supabase.from('pokemons').select('*')
+
+      if (error) {
+        console.error('Error fetching pokemons:', error)
+        return
+      }
+      console.log(data)
+
+    }
+
+    getPokemons()
+  }, [])
+
 
   return (
     <>
@@ -28,6 +47,11 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <ul>
+        {pokemons?.map((pokemon) => (
+          <li key={pokemon.id}>{pokemon.name}</li>
+        ))}
+      </ul>
     </>
   )
 }
