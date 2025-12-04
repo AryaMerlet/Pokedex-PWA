@@ -4,26 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import supabase from "../utils/supabase";
+import { getPokemons, getUserPokedex, isPokemonInPokedex } from "@/utils/pokedex";
+import { useAuth } from "@/context/AuthContext";
 
-// Placeholder Pokemon data (will be replaced with database data from pokedex table )
-const placeholderPokemons = [
-	{ id: 1, name: "Bulbasaur", types: ["Grass", "Poison"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" },
-	{ id: 2, name: "Ivysaur", types: ["Grass", "Poison"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png" },
-	{ id: 3, name: "Venusaur", types: ["Grass", "Poison"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-	{ id: 4, name: "Charmander", types: ["Fire"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" },
-	{ id: 5, name: "Charmeleon", types: ["Fire"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png" },
-	{ id: 6, name: "Charizard", types: ["Fire", "Flying"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" },
-	{ id: 7, name: "Squirtle", types: ["Water"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" },
-	{ id: 8, name: "Wartortle", types: ["Water"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png" },
-	{ id: 9, name: "Blastoise", types: ["Water"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png" },
-	{ id: 10, name: "Caterpie", types: ["Bug"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png" },
-	{ id: 11, name: "Metapod", types: ["Bug"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png" },
-	{ id: 12, name: "Butterfree", types: ["Bug", "Flying"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png" },
-	{ id: 25, name: "Pikachu", types: ["Electric"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" },
-	{ id: 39, name: "Jigglypuff", types: ["Normal", "Fairy"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png" },
-	{ id: 133, name: "Eevee", types: ["Normal"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" },
-	{ id: 150, name: "Mewtwo", types: ["Psychic"], sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png" },
-];
+
 
 // Type colors mapping
 const typeColors = {
@@ -66,40 +50,87 @@ const typeBadgeColors = {
 	Dark: "bg-gray-800",
 	Steel: "bg-slate-500",
 	Fairy: "bg-pink-400",
+
+
 };
+
+
+function PokemonItem({ pokemon, isOwned }) {
+	return (
+		<Card
+			key={pokemon.id}
+			className={`bg-linear-to-br ${typeColors[pokemon.types?.[0]] || "from-gray-400 to-gray-500"} border-white/20 hover:scale-105 transition-all duration-300 cursor-pointer hover:shadow-2xl animate-fade-in-up group`}
+
+		>
+			<CardHeader className="pb-0 pt-3 px-3">
+				<div className="text-white/60 text-xs font-bold">#{String(pokemon.id).padStart(3, "0")}</div>
+			</CardHeader>
+			<CardContent className="p-3 pt-0">
+				{/* Pokemon Sprite */}
+				<div className="relative w-full aspect-square mb-2 flex items-center justify-center">
+					<div className="absolute inset-0 bg-white/10 rounded-full scale-75 group-hover:scale-90 transition-transform"></div>
+					<img
+						src={pokemon.sprite || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+						alt={isOwned ? pokemon?.name : "Mystery Pokemon"}
+						className={`w-full h-full object-contain drop-shadow-2xl transition-all duration-700 ${isOwned
+							? "filter-none scale-100 opacity-100"
+							: "brightness-0 scale-90 opacity-80"
+							}`}
+					/>
+				</div>
+
+				{/* Pokemon Name */}
+				<CardTitle className="text-white text-sm sm:text-base font-bold text-center capitalize mb-2">
+					{isOwned ? pokemon.name : "Mystery Pokemon"}
+				</CardTitle>
+
+				{/* Type Badges */}
+				<div className="flex flex-wrap justify-center gap-1">
+					{pokemon.types?.map((type) => (
+						<span
+							key={type}
+							className={`${typeBadgeColors[type] || "bg-gray-500"} text-white text-xs px-2 py-0.5 rounded-full font-medium shadow-sm`}
+						>
+							{type}
+						</span>
+					))}
+				</div>
+			</CardContent>
+		</Card>
+	);
+}
 
 export default function Pokedex() {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState("");
-	const [pokemons, setPokemons] = useState(placeholderPokemons);
+	const [pokemons, setPokemons] = useState([]);
+	const [userPokemons, setUserPokemons] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [selectedType, setSelectedType] = useState("All");
+	const [myPokemons, setMyPokemons] = useState([]);
+	const [allPokemons, setAllPokemons] = useState([]);
+	const { user } = useAuth();
 
 	// Fetch pokemons from database
 	useEffect(() => {
-		async function fetchPokemons() {
-			try {
-				const { data, error } = await supabase.from("pokemons").select("*");
-				if (error) {
-					console.error("Error fetching pokemons:", error);
-					// Fall back to placeholder data
-					setPokemons(placeholderPokemons);
-				} else if (data && data.length > 0) {
-					setPokemons(data);
-				}
-			} catch (err) {
-				console.error("Failed to fetch:", err);
-			} finally {
-				setLoading(false);
-			}
+
+
+		async function initPokedex() {
+			const pokedex = await getUserPokedex(user.id);
+			const pokemons = await getPokemons();
+
+			setAllPokemons(pokemons);
+			setMyPokemons(pokedex);
+
 		}
-		fetchPokemons();
+
+		initPokedex();
+
+
 	}, []);
 
-	// Filter pokemons based on search term and selected type
-	const filteredPokemons = pokemons.filter((pokemon) => {
-		console.log(pokemon);
-
+	// Filter pokemons based on search term and selected type state
+	const filteredPokemons = allPokemons.filter((pokemon) => {
 		const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
 		const matchesType = selectedType === "All" || pokemon.types?.includes(selectedType);
 		return matchesSearch && matchesType;
@@ -211,45 +242,7 @@ export default function Pokedex() {
 
 				{/* Pokemon Grid */}
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 max-w-7xl mx-auto">
-					{filteredPokemons.map((pokemon, index) => (
-						<Card
-							key={pokemon.id}
-							className={`bg-linear-to-br ${typeColors[pokemon.types?.[0]] || "from-gray-400 to-gray-500"} border-white/20 hover:scale-105 transition-all duration-300 cursor-pointer hover:shadow-2xl animate-fade-in-up group`}
-							style={{ animationDelay: `${index * 50}ms` }}
-						>
-							<CardHeader className="pb-0 pt-3 px-3">
-								<div className="text-white/60 text-xs font-bold">#{String(pokemon.id).padStart(3, "0")}</div>
-							</CardHeader>
-							<CardContent className="p-3 pt-0">
-								{/* Pokemon Sprite */}
-								<div className="relative w-full aspect-square mb-2 flex items-center justify-center">
-									<div className="absolute inset-0 bg-white/10 rounded-full scale-75 group-hover:scale-90 transition-transform"></div>
-									<img
-										src={pokemon.sprite || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-										alt={pokemon.name}
-										className="w-full h-full object-contain relative z-10 drop-shadow-lg group-hover:scale-110 transition-transform"
-									/>
-								</div>
-
-								{/* Pokemon Name */}
-								<CardTitle className="text-white text-sm sm:text-base font-bold text-center capitalize mb-2">
-									{pokemon.name}
-								</CardTitle>
-
-								{/* Type Badges */}
-								<div className="flex flex-wrap justify-center gap-1">
-									{pokemon.types?.map((type) => (
-										<span
-											key={type}
-											className={`${typeBadgeColors[type] || "bg-gray-500"} text-white text-xs px-2 py-0.5 rounded-full font-medium shadow-sm`}
-										>
-											{type}
-										</span>
-									))}
-								</div>
-							</CardContent>
-						</Card>
-					))}
+					{filteredPokemons.map((pokemon) => <PokemonItem pokemon={pokemon} isOwned={myPokemons.includes(pokemon.id)} />)}
 				</div>
 
 				{/* Empty State */}

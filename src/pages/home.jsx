@@ -2,9 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
 	const navigate = useNavigate();
+	const { user, signOut } = useAuth();
+
+	const handleLogout = async () => {
+		await signOut();
+	};
 
 	return (
 		<div className="min-h-screen bg-linear-to-br from-red-500 via-purple-600 to-blue-600 relative overflow-hidden">
@@ -33,59 +39,133 @@ export default function Home() {
 						</p>
 					</div>
 
-					<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in animation-delay-300 px-4">
-						<Button
-							size="lg"
-							className="w-full sm:w-auto bg-white text-purple-700 hover:bg-white/90 font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-2xl hover:scale-105 transition-transform"
-							onClick={() => navigate("/login")}
-						>
-							Get Started
-						</Button>
-						<Button
-							size="lg"
-							variant="outline"
-							className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30 font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-2xl hover:scale-105 transition-transform"
-							onClick={() => navigate("/pokedex")}
-						>
-							Explore Pokedex
-						</Button>
-					</div>
+					{user ? (
+						<div className="flex flex-col items-center gap-4 animate-fade-in animation-delay-300 px-4">
+							{/* User Info Card */}
+							<div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl p-4 sm:p-6 shadow-xl">
+								<div className="flex items-center gap-3 sm:gap-4">
+									<div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+										<span className="text-xl sm:text-2xl font-bold text-white">
+											{user.email?.charAt(0).toUpperCase() || "U"}
+										</span>
+									</div>
+									<div className="text-left">
+										<p className="text-white/70 text-sm">Welcome back, Trainer!</p>
+										<p className="text-white font-semibold text-base sm:text-lg truncate max-w-[200px] sm:max-w-[300px]">
+											{user.email}
+										</p>
+									</div>
+								</div>
+							</div>
+
+							{/* Action Buttons */}
+							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full">
+								<Button
+									size="lg"
+									className="w-full sm:w-auto bg-white text-purple-700 hover:bg-white/90 font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-2xl hover:scale-105 transition-transform"
+									onClick={() => navigate("/pokedex")}
+								>
+									Go to Pokedex
+								</Button>
+								<Button
+									size="lg"
+									variant="outline"
+									className="w-full sm:w-auto bg-red-500/80 backdrop-blur-sm text-white border-red-400/40 hover:bg-red-600 font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-2xl hover:scale-105 transition-transform"
+									onClick={handleLogout}
+								>
+									Logout
+								</Button>
+							</div>
+						</div>
+					) : (
+						<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in animation-delay-300 px-4">
+							<Button
+								size="lg"
+								className="w-full sm:w-auto bg-white text-purple-700 hover:bg-white/90 font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-2xl hover:scale-105 transition-transform"
+								onClick={() => navigate("/login")}
+							>
+								Get Started
+							</Button>
+							<Button
+								size="lg"
+								variant="outline"
+								className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30 font-bold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-2xl hover:scale-105 transition-transform"
+								onClick={() => navigate("/pokedex")}
+							>
+								Explore Pokedex
+							</Button>
+						</div>
+					)}
 				</div>
 
 				{/* Features Section */}
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
-					{/* Login Feature */}
-					<Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 sm:hover:scale-105 hover:shadow-2xl animate-fade-in-up">
-						<CardHeader>
-							<div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-linear-to-br from-blue-400 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg">
-								<svg
-									className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
+					{/* Login/Profile Feature */}
+					{user ? (
+						<Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 sm:hover:scale-105 hover:shadow-2xl animate-fade-in-up">
+							<CardHeader>
+								<div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg">
+									<svg
+										className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+										/>
+									</svg>
+								</div>
+								<CardTitle className="text-xl sm:text-2xl font-bold text-white">Your Profile</CardTitle>
+								<CardDescription className="text-white/80 text-sm sm:text-base">
+									Logged in as {user.email}
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<Button
+									className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg text-sm sm:text-base"
+									onClick={handleLogout}
 								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-									/>
-								</svg>
-							</div>
-							<CardTitle className="text-xl sm:text-2xl font-bold text-white">Login & Profile</CardTitle>
-							<CardDescription className="text-white/80 text-sm sm:text-base">
-								Create your trainer account and track your progress across devices
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<Button
-								className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg text-sm sm:text-base"
-								onClick={() => navigate("/login")}
-							>
-								Sign In
-							</Button>
-						</CardContent>
-					</Card>
+									Sign Out
+								</Button>
+							</CardContent>
+						</Card>
+					) : (
+						<Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 sm:hover:scale-105 hover:shadow-2xl animate-fade-in-up">
+							<CardHeader>
+								<div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-linear-to-br from-blue-400 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg">
+									<svg
+										className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+										/>
+									</svg>
+								</div>
+								<CardTitle className="text-xl sm:text-2xl font-bold text-white">Login & Profile</CardTitle>
+								<CardDescription className="text-white/80 text-sm sm:text-base">
+									Create your trainer account and track your progress across devices
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<Button
+									className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg text-sm sm:text-base"
+									onClick={() => navigate("/login")}
+								>
+									Sign In
+								</Button>
+							</CardContent>
+						</Card>
+					)}
 
 					{/* Catch Feature */}
 					<Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all duration-300 sm:hover:scale-105 hover:shadow-2xl animate-fade-in-up animation-delay-150">
