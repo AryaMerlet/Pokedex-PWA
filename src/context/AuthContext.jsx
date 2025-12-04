@@ -40,6 +40,7 @@ export const AuthContext = ({ children }) => {
 		if (error) {
 			console.error("Error signing out:", error);
 		}
+		setUser(null);
 	}
 
 	async function signUpNewUser(email, password) {
