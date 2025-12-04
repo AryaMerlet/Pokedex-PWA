@@ -1,5 +1,209 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Catch() {
-	return <h1>Catch Page</h1>;
+	const navigate = useNavigate();
+	const [pokemon, setPokemon] = useState(null);
+	const [loading, setLoading] = useState(false);
+	const [revealed, setRevealed] = useState(false);
+	const [addedToPokedex, setAddedToPokedex] = useState(false);
+
+	// Fetch a random Pokemon (Gen 1: 1-151)
+	const fetchRandomPokemon = async () => {
+		setLoading(true);
+		setRevealed(false);
+		setAddedToPokedex(false);
+		const randomId = Math.floor(Math.random() * 151) + 1;
+		try {
+			//TODO : Replace this function api call with a either a local storage or a supabase database call
+			const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+			const data = await response.json();
+			setPokemon(data);
+		} catch (error) {
+			console.error("Error fetching Pokemon:", error);
+		}
+		setLoading(false);
+	};
+
+	// Load a Pokemon on mount
+	useEffect(() => {
+		fetchRandomPokemon();
+	}, []);
+
+	// Reveal the Pokemon and add to Pokedex
+	const revealPokemon = () => {
+		setRevealed(true);
+
+		// Add to Pokedex in localStorage
+		if (pokemon) {
+			const storedPokedex = JSON.parse(localStorage.getItem("pokedex") || "[]");
+			const pokemonEntry = {
+				id: pokemon.id,
+				name: pokemon.name,
+				sprite: pokemon.sprites?.other?.["official-artwork"]?.front_default || pokemon.sprites?.front_default,
+				stats: {
+					hp: pokemon.stats[0].base_stat,
+					attack: pokemon.stats[1].base_stat,
+					defense: pokemon.stats[2].base_stat,
+				},
+				caughtAt: new Date().toISOString(),
+			};
+
+			// Check if already in Pokedex
+			const alreadyExists = storedPokedex.some(p => p.id === pokemon.id);
+			if (!alreadyExists) {
+				storedPokedex.push(pokemonEntry);
+				localStorage.setItem("pokedex", JSON.stringify(storedPokedex));
+			}
+			setAddedToPokedex(true);
+		}
+	};
+
+	// Draw again (for testing)
+	const drawAgain = () => {
+		fetchRandomPokemon();
+	};
+
+	return (
+		<div className="min-h-screen bg-linear-to-br from-red-500 via-purple-600 to-blue-600 relative overflow-hidden">
+			{/* Animated background orbs - hidden on mobile for performance */}
+			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none hidden sm:block">
+				<div className="absolute top-10 left-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+				<div className="absolute top-20 right-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+				<div className="absolute bottom-10 left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+			</div>
+
+			{/* Main Content */}
+			<div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+				{/* Header */}
+				<div className="text-center mb-8 sm:mb-12">
+					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 sm:mb-4 drop-shadow-2xl tracking-tight">
+						Pokemon Draw
+					</h1>
+					<p className="text-base sm:text-lg md:text-xl text-white/90 font-medium max-w-xl mx-auto">
+						{revealed
+							? "You found a new Pokemon! It's been added to your Pokedex."
+							: "A mystery Pokemon awaits! Tap to reveal your catch!"
+						}
+					</p>
+				</div>
+
+				{/* Pokemon Card */}
+				<div className="max-w-md mx-auto mb-8">
+					<Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
+						<CardHeader className="text-center pb-2">
+							<CardTitle className="text-xl sm:text-2xl font-bold text-white capitalize">
+								{loading ? "Drawing..." : revealed ? pokemon?.name : "???"}
+							</CardTitle>
+						</CardHeader>
+						<CardContent className="flex flex-col items-center">
+							{/* Pokemon Image */}
+							<div className="relative w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 mb-4">
+								{loading ? (
+									<div className="w-full h-full flex items-center justify-center">
+										<div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+									</div>
+								) : (
+									<div className="relative w-full h-full bg-white/30 rounded-2xl py-4">
+										{/* Hidden silhouette or revealed Pokemon */}
+										<img
+											src={pokemon?.sprites?.other?.["official-artwork"]?.front_default || pokemon?.sprites?.front_default}
+											alt={revealed ? pokemon?.name : "Mystery Pokemon"}
+											className={`w-full h-full object-contain drop-shadow-2xl transition-all duration-700 ${revealed
+												? "filter-none scale-100 opacity-100"
+												: "brightness-0 scale-90 opacity-80"
+												}`}
+										/>
+										{/* Question mark overlay when hidden */}
+										{!revealed && (
+											<div className="absolute inset-0 flex items-center justify-center">
+												<span className="text-6xl sm:text-7xl lg:text-8xl font-black text-white/50 animate-pulse">?</span>
+											</div>
+										)}
+									</div>
+								)}
+							</div>
+
+							{/* Pokemon Stats - only show when revealed */}
+							{!loading && pokemon && revealed && (
+								<div className="flex gap-4 mb-4 text-white/80 text-sm sm:text-base">
+									<span>HP: {pokemon.stats[0].base_stat}</span>
+									<span>•</span>
+									<span>ATK: {pokemon.stats[1].base_stat}</span>
+									<span>•</span>
+									<span>DEF: {pokemon.stats[2].base_stat}</span>
+								</div>
+							)}
+
+							{/* Added to Pokedex Message */}
+							{addedToPokedex && (
+								<div className="text-lg sm:text-xl font-bold mb-4 text-green-400">
+									🎉 {pokemon?.name} added to your Pokedex!
+								</div>
+							)}
+
+							{/* Action Buttons */}
+							<div className="flex flex-col gap-3 w-full">
+								{!revealed ? (
+									<Button
+										className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-base sm:text-lg py-5 sm:py-6 rounded-full shadow-xl hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+										onClick={revealPokemon}
+										disabled={loading}
+									>
+										<span className="flex items-center justify-center gap-2">
+											✨ Reveal Pokemon!
+										</span>
+									</Button>
+								) : (
+									<Button
+										className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-base sm:text-lg py-5 sm:py-6 rounded-full shadow-xl hover:scale-105 transition-transform"
+										onClick={drawAgain}
+									>
+										🔄 Draw Again (Testing)
+									</Button>
+								)}
+							</div>
+						</CardContent>
+					</Card>
+				</div>
+
+				{/* Navigation */}
+				<div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-md mx-auto">
+					<Button
+						variant="outline"
+						className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30 font-semibold px-6 py-5 rounded-full"
+						onClick={() => navigate("/")}
+					>
+						← Back Home
+					</Button>
+					<Button
+						variant="outline"
+						className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30 font-semibold px-6 py-5 rounded-full"
+						onClick={() => navigate("/pokedex")}
+					>
+						View Pokedex →
+					</Button>
+				</div>
+			</div>
+
+			<style jsx>{`
+				@keyframes blob {
+					0%, 100% { transform: translate(0px, 0px) scale(1); }
+					33% { transform: translate(30px, -50px) scale(1.1); }
+					66% { transform: translate(-20px, 20px) scale(0.9); }
+				}
+				.animate-blob {
+					animation: blob 7s infinite;
+				}
+				.animation-delay-2000 {
+					animation-delay: 2s;
+				}
+				.animation-delay-4000 {
+					animation-delay: 4s;
+				}
+			`}</style>
+		</div >
+	);
 }
