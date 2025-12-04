@@ -7,15 +7,15 @@ import { FieldDescription } from "@/components/ui/field";
 import { Navigate } from "react-router";
 
 export default function LoginForm() {
-	const [username, setUsername] = useState("");
+	const [email, setemail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
-	const { login, user } = useAuth();
+	const { signInWithEmail, user } = useAuth();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		await login(formData.get("username"), formData.get("password"));
+		await signInWithEmail(formData.get("email"), formData.get("password"));
 	};
 
 	return user ? (
@@ -23,13 +23,13 @@ export default function LoginForm() {
 	) : (
 		<form onSubmit={handleSubmit} className="space-y-4">
 			<div className="space-y-2">
-				<Label htmlFor="username">Pseudo</Label>
+				<Label htmlFor="email">E-mail</Label>
 				<Input
-					id="username"
-					name="username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					placeholder="Entrez votre pseudo"
+					id="email"
+					name="email"
+					value={email}
+					onChange={(e) => setemail(e.target.value)}
+					placeholder="Entrez votre e-mail	"
 					required
 				/>
 			</div>
