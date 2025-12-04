@@ -15,7 +15,7 @@ export default defineConfig({
 				enabled: true,
 			},
 			workbox: {
-				globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,gif,svg,webp}"],
+				globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,gif,svg}"],
 			},
 			manifest: {
 				name: "Pokedex PWA",
@@ -27,14 +27,14 @@ export default defineConfig({
 				theme_color: "#ffffff",
 				icons: [
 					{
-						src: "/pokeball-512x512.webp",
+						src: "/pokeball.png",
 						sizes: "192x192",
-						type: "image/webp",
+						type: "image/png",
 					},
 					{
-						src: "/pokeball-512x512.webp",
+						src: "/pokeball.png",
 						sizes: "512x512",
-						type: "image/webp",
+						type: "image/png",
 					},
 				],
 			},
