@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { addPokemonToPokedex } from "@/utils/pokedex";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Catch() {
 	const navigate = useNavigate();
+	const { user } = useAuth();
 	const [pokemon, setPokemon] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [revealed, setRevealed] = useState(false);
@@ -55,6 +58,7 @@ export default function Catch() {
 			const alreadyExists = storedPokedex.some(p => p.id === pokemon.id);
 			if (!alreadyExists) {
 				storedPokedex.push(pokemonEntry);
+				addPokemonToPokedex(user.id, pokemon.id);
 				localStorage.setItem("pokedex", JSON.stringify(storedPokedex));
 			}
 			setAddedToPokedex(true);
@@ -140,7 +144,7 @@ export default function Catch() {
 							{/* Added to Pokedex Message */}
 							{addedToPokedex && (
 								<div className="text-lg sm:text-xl font-bold mb-4 text-green-400">
-									🎉 {pokemon?.name} added to your Pokedex!
+									🎉 {pokemon?.name.substring(0, 1).toUpperCase() + pokemon?.name.substring(1).toLowerCase()} added to your Pokedex!
 								</div>
 							)}
 

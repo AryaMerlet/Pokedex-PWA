@@ -14,21 +14,6 @@ import supabase from "./utils/supabase";
 
 function App() {
 	const [count, setCount] = useState(0);
-	const [pokemons, setPokemons] = useState([]);
-
-	useEffect(() => {
-		async function getPokemons() {
-			const { data, error } = await supabase.from("pokemons").select("*");
-
-			if (error) {
-				console.error("Error fetching pokemons:", error);
-				return;
-			}
-			console.log(data);
-		}
-
-		getPokemons();
-	}, []);
 
 	return (
 		<Routes>
