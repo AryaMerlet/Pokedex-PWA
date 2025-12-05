@@ -10,7 +10,6 @@ import LoginPage from "./pages/login";
 import SignupPage from "./pages/signup";
 // import MainLayout from "./components/mainLayout";
 import "./App.css";
-import supabase from "./utils/supabase";
 
 function App() {
 	const [count, setCount] = useState(0);
