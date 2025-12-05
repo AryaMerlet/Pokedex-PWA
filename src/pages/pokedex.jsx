@@ -181,12 +181,10 @@ export default function Pokedex() {
 
 							{/* Type Filter */}
 							<div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
-								<Button
+								<div
 									key={"Owned"}
-									variant={selectedOwned ? "default" : "outline"}
-									size="sm"
-									className={`whitespace-nowrap rounded-full ${selectedOwned
-										? "bg-white text-gray-800 hover:bg-white/90"
+									className={`whitespace-nowrap rounded-full cursor-pointer flex items-center gap-x-2 px-3 h-8 text-sm transition-colors border ${selectedOwned
+										? "bg-white text-gray-800 hover:bg-white/90 border-transparent"
 										: "bg-white/10 text-white border-white/30 hover:bg-white/20"
 										}`}
 									onClick={() => setSelectedOwned(!selectedOwned)}
@@ -196,7 +194,7 @@ export default function Pokedex() {
 										className="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft"
 									/>
 									Owned
-								</Button>
+								</div>
 								{["All", "Fire", "Water", "Grass", "Electric", "Psychic"].map((type) => (
 									<Button
 										key={type}
@@ -220,7 +218,7 @@ export default function Pokedex() {
 				{/* Stats Bar */}
 				<div className="max-w-4xl mx-auto mb-6 flex justify-between items-center px-2">
 					<p className="text-white/80 text-sm sm:text-base">
-						Showing <span className="font-bold text-white">{filteredPokemons.length}</span> Pokemon
+						Showing <span className="font-bold text-white">{filteredPokemons?.length}</span> Pokemon
 					</p>
 					{pokedexLoading || pokemonsLoading && (
 						<div className="flex items-center gap-2 text-white/80">
@@ -235,11 +233,11 @@ export default function Pokedex() {
 
 				{/* Pokemon Grid */}
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 max-w-7xl mx-auto">
-					{filteredPokemons.map((pokemon) => <PokemonItem pokemon={pokemon} isOwned={pokedex?.includes(pokemon.id)} />)}
+					{filteredPokemons?.map((pokemon) => <PokemonItem key={pokemon.id} pokemon={pokemon} isOwned={pokedex?.includes(pokemon.id)} />)}
 				</div>
 
 				{/* Empty State */}
-				{filteredPokemons.length === 0 && !(pokemonsLoading || pokedexLoading) && (
+				{filteredPokemons?.length === 0 && !(pokemonsLoading || pokedexLoading) && (
 					<div className="text-center py-16 animate-fade-in">
 						<div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 max-w-md mx-auto">
 							<svg className="w-16 h-16 mx-auto text-white/60 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,7 +250,7 @@ export default function Pokedex() {
 				)}
 			</div>
 
-			<style jsx>{`
+			<style jsx={"true"}>{`
 				@keyframes blob {
 					0%, 100% { transform: translate(0px, 0px) scale(1); }
 					33% { transform: translate(30px, -50px) scale(1.1); }
