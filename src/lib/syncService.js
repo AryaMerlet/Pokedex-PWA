@@ -1,8 +1,5 @@
 import { getPendingOperations, removeOperation, db } from "./offlineDb";
-import {
-	addPokemonToPokedex,
-	removePokemonFromPokedex,
-} from "../utils/pokedex";
+import { addPokemonToPokedex } from "../utils/pokedex";
 
 /**
  * Sync pending operations when back online

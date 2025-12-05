@@ -3,7 +3,6 @@ import {
 	getPokemons,
 	getUserPokedex,
 	addPokemonToPokedex,
-	removePokemonFromPokedex,
 	isPokemonInPokedex,
 } from "../utils/pokedex";
 import { queueOperation } from "../lib/offlineDb";
