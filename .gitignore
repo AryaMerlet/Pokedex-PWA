@@ -28,3 +28,4 @@ dev-dist
 .env.development
 .env.production
 dev-dist/sw.js
+*sw.js
