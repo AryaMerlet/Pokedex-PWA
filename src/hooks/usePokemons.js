@@ -4,6 +4,7 @@ import {
 	getUserPokedex,
 	addPokemonToPokedex,
 	isPokemonInPokedex,
+	getPokemonById,
 } from "../utils/pokedex";
 import { queueOperation } from "../lib/offlineDb";
 
@@ -17,6 +18,17 @@ export function usePokemons() {
 		queryKey: ["pokemons"],
 		queryFn: getPokemons,
 		staleTime: 1000 * 60 * 60, // 1 hour
+		gcTime: 1000 * 60 * 60 * 24, // 24 hours
+		networkMode: "offlineFirst",
+		retry: 3,
+	});
+}
+
+export function usePokemonById(pokemonId) {
+	return useQuery({
+		queryKey: ["pokemon", pokemonId],
+		queryFn: () => getPokemonById(pokemonId),
+		staleTime: 1000 * 60 * 5, // 5 minutes
 		gcTime: 1000 * 60 * 60 * 24, // 24 hours
 		networkMode: "offlineFirst",
 		retry: 3,

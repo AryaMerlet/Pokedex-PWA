@@ -1,73 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { addPokemonToPokedex } from "@/utils/pokedex";
+import {
+	usePokemons,
+	useCatchPokemon,
+	usePokedex,
+} from "@/hooks/usePokemons";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Catch() {
 	const navigate = useNavigate();
 	const { user } = useAuth();
-	const [pokemon, setPokemon] = useState(null);
-	const [loading, setLoading] = useState(false);
+
+	// State for random Pokemon ID
+	const [randomId, setRandomId] = useState(
+		() => Math.floor(Math.random() * 151) + 1
+	);
 	const [revealed, setRevealed] = useState(false);
-	const [addedToPokedex, setAddedToPokedex] = useState(false);
+	const [wasCaughtBefore, setWasCaughtBefore] = useState(false);
 
-	// Fetch a random Pokemon (Gen 1: 1-151)
-	const fetchRandomPokemon = async () => {
-		setLoading(true);
-		setRevealed(false);
-		setAddedToPokedex(false);
-		const randomId = Math.floor(Math.random() * 151) + 1;
-		try {
-			//TODO : Replace this function api call with a either a local storage or a supabase database call
-			const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
-			const data = await response.json();
-			setPokemon(data);
-		} catch (error) {
-			console.error("Error fetching Pokemon:", error);
-		}
-		setLoading(false);
-	};
+	// TanStack Query hooks
+	const { data: allPokemons, isLoading: pokemonsLoading } = usePokemons();
+	const { data: myPokedex } = usePokedex(user?.id);
+	const catchMutation = useCatchPokemon();
 
-	// Load a Pokemon on mount
-	useEffect(() => {
-		fetchRandomPokemon();
-	}, []);
+	// Derive current Pokemon from cache
+	const pokemon = allPokemons?.find((p) => p.id === randomId);
+	const loading = pokemonsLoading || !pokemon;
+
+	// Check if already caught using cached pokedex data
+	const isAlreadyCaught = myPokedex?.includes(randomId);
 
 	// Reveal the Pokemon and add to Pokedex
-	const revealPokemon = () => {
+	const revealPokemon = async () => {
 		setRevealed(true);
 
-		// Add to Pokedex in localStorage
-		if (pokemon) {
-			const storedPokedex = JSON.parse(localStorage.getItem("pokedex") || "[]");
-			const pokemonEntry = {
-				id: pokemon.id,
-				name: pokemon.name,
-				sprite: pokemon.sprites?.other?.["official-artwork"]?.front_default || pokemon.sprites?.front_default,
-				stats: {
-					hp: pokemon.stats[0].base_stat,
-					attack: pokemon.stats[1].base_stat,
-					defense: pokemon.stats[2].base_stat,
-				},
-				caughtAt: new Date().toISOString(),
-			};
+		// Capture current state before mutation changes it
+		const alreadyCaught = isAlreadyCaught;
+		setWasCaughtBefore(alreadyCaught);
 
-			// Check if already in Pokedex
-			const alreadyExists = storedPokedex.some(p => p.id === pokemon.id);
-			if (!alreadyExists) {
-				storedPokedex.push(pokemonEntry);
-				addPokemonToPokedex(user.id, pokemon.id);
-				localStorage.setItem("pokedex", JSON.stringify(storedPokedex));
+		// Only catch if Pokemon is not already in pokedex
+		if (pokemon && user && !alreadyCaught) {
+			try {
+				await catchMutation.mutateAsync({
+					userId: user.id,
+					pokemonId: pokemon.id,
+				});
+			} catch (error) {
+				console.error("Failed to catch pokemon:", error);
 			}
-			setAddedToPokedex(true);
 		}
 	};
 
 	// Draw again (for testing)
 	const drawAgain = () => {
-		fetchRandomPokemon();
+		setRevealed(false);
+		setRandomId(Math.floor(Math.random() * 151) + 1);
+		setWasCaughtBefore(false);
+		catchMutation.reset(); // Reset mutation state for next draw
 	};
 
 	return (
@@ -89,8 +80,7 @@ export default function Catch() {
 					<p className="text-base sm:text-lg md:text-xl text-white/90 font-medium max-w-xl mx-auto">
 						{revealed
 							? "You found a new Pokemon! It's been added to your Pokedex."
-							: "A mystery Pokemon awaits! Tap to reveal your catch!"
-						}
+							: "A mystery Pokemon awaits! Tap to reveal your catch!"}
 					</p>
 				</div>
 
@@ -113,17 +103,27 @@ export default function Catch() {
 									<div className="relative w-full h-full bg-white/30 rounded-2xl py-4">
 										{/* Hidden silhouette or revealed Pokemon */}
 										<img
-											src={pokemon?.sprites?.other?.["official-artwork"]?.front_default || pokemon?.sprites?.front_default}
+											src={
+												pokemon?.sprite ||
+												pokemon?.sprite_url ||
+												pokemon?.sprites?.other?.["official-artwork"]
+													?.front_default ||
+												pokemon?.sprites?.front_default ||
+												`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png`
+											}
 											alt={revealed ? pokemon?.name : "Mystery Pokemon"}
-											className={`w-full h-full object-contain drop-shadow-2xl transition-all duration-700 ${revealed
-												? "filter-none scale-100 opacity-100"
-												: "brightness-0 scale-90 opacity-80"
-												}`}
+											className={`w-full h-full object-contain drop-shadow-2xl transition-all duration-700 ${
+												revealed
+													? "filter-none scale-100 opacity-100"
+													: "brightness-0 scale-90 opacity-80"
+											}`}
 										/>
 										{/* Question mark overlay when hidden */}
 										{!revealed && (
 											<div className="absolute inset-0 flex items-center justify-center">
-												<span className="text-6xl sm:text-7xl lg:text-8xl font-black text-white/50 animate-pulse">?</span>
+												<span className="text-6xl sm:text-7xl lg:text-8xl font-black text-white/50 animate-pulse">
+													?
+												</span>
 											</div>
 										)}
 									</div>
@@ -131,20 +131,34 @@ export default function Catch() {
 							</div>
 
 							{/* Pokemon Stats - only show when revealed */}
-							{!loading && pokemon && revealed && (
+							{!loading && pokemon && revealed && pokemon?.stats && (
 								<div className="flex gap-4 mb-4 text-white/80 text-sm sm:text-base">
-									<span>HP: {pokemon.stats[0].base_stat}</span>
+									<span>HP: {pokemon.stats[0]?.base_stat || "?"}</span>
 									<span>•</span>
-									<span>ATK: {pokemon.stats[1].base_stat}</span>
+									<span>ATK: {pokemon.stats[1]?.base_stat || "?"}</span>
 									<span>•</span>
-									<span>DEF: {pokemon.stats[2].base_stat}</span>
+									<span>DEF: {pokemon.stats[2]?.base_stat || "?"}</span>
 								</div>
 							)}
 
 							{/* Added to Pokedex Message */}
-							{addedToPokedex && (
+							{revealed && pokemon && (
 								<div className="text-lg sm:text-xl font-bold mb-4 text-green-400">
-									🎉 {pokemon?.name.substring(0, 1).toUpperCase() + pokemon?.name.substring(1).toLowerCase()} added to your Pokedex!
+									{catchMutation.isSuccess ? (
+										<>
+											🎉{" "}
+											{pokemon.name.charAt(0).toUpperCase() +
+												pokemon.name.slice(1)}{" "}
+											added to your Pokedex!
+										</>
+									) : isAlreadyCaught ? (
+										<>
+											🔄{" "}
+											{pokemon.name.charAt(0).toUpperCase() +
+												pokemon.name.slice(1)}{" "}
+											was already in your Pokedex!
+										</>
+									) : null}
 								</div>
 							)}
 
@@ -194,9 +208,16 @@ export default function Catch() {
 
 			<style jsx>{`
 				@keyframes blob {
-					0%, 100% { transform: translate(0px, 0px) scale(1); }
-					33% { transform: translate(30px, -50px) scale(1.1); }
-					66% { transform: translate(-20px, 20px) scale(0.9); }
+					0%,
+					100% {
+						transform: translate(0px, 0px) scale(1);
+					}
+					33% {
+						transform: translate(30px, -50px) scale(1.1);
+					}
+					66% {
+						transform: translate(-20px, 20px) scale(0.9);
+					}
 				}
 				.animate-blob {
 					animation: blob 7s infinite;
@@ -208,6 +229,6 @@ export default function Catch() {
 					animation-delay: 4s;
 				}
 			`}</style>
-		</div >
+		</div>
 	);
 }
