@@ -35,3 +35,13 @@ export const getPokemons = async () => {
     if (error) throw error;
     return data;
 }
+
+export const removePokemonFromPokedex = async (userId, pokemonId) => {
+    const { error } = await supabase
+        .from('pokedex')
+        .delete()
+        .eq('user_id', userId)
+        .eq('pokemon_id', pokemonId);
+    if (error) throw error;
+    return { success: true };
+}
