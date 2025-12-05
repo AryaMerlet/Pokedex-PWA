@@ -7,6 +7,7 @@ import { getPokemons, getUserPokedex, isPokemonInPokedex } from "@/utils/pokedex
 import { useAuth } from "@/context/AuthContext";
 import { AnimatedOrbs } from "@/components/animated-orbs";
 import { Checkbox } from "@/components/ui/checkbox";
+import { usePokedex, usePokemons } from "@/hooks/usePokemons";
 
 
 
@@ -103,30 +104,17 @@ function PokemonItem({ pokemon, isOwned }) {
 export default function Pokedex() {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState("");
-	const [loading, setLoading] = useState(true);
 	const [selectedType, setSelectedType] = useState("All");
 	const [selectedOwned, setSelectedOwned] = useState(true);
-	const [myPokemons, setMyPokemons] = useState([]);
-	const [allPokemons, setAllPokemons] = useState([]);
 	const { user } = useAuth();
-
-	// Fetch pokemons from database
-	useEffect(() => {
-		async function initPokedex() {
-			const pokedex = await getUserPokedex(user.id);
-			const pokemons = await getPokemons();
-			setAllPokemons(pokemons);
-			setMyPokemons(pokedex);
-			setLoading(false);
-		}
-		initPokedex();
-	}, []);
+	const { data: pokedex, isLoading: pokedexLoading } = usePokedex(user.id);
+	const { data: pokemons, isLoading: pokemonsLoading } = usePokemons();
 
 	// Filter pokemons based on search term and selected type state
-	const filteredPokemons = allPokemons.filter((pokemon) => {
+	const filteredPokemons = pokemons?.filter((pokemon) => {
 		const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
 		const matchesType = selectedType === "All" || pokemon.types?.includes(selectedType);
-		const matchesOwned = selectedOwned ? myPokemons.includes(pokemon.id) : true;
+		const matchesOwned = selectedOwned ? pokedex?.includes(pokemon.id) : true;
 		return matchesSearch && matchesType && matchesOwned;
 	});
 
@@ -234,7 +222,7 @@ export default function Pokedex() {
 					<p className="text-white/80 text-sm sm:text-base">
 						Showing <span className="font-bold text-white">{filteredPokemons.length}</span> Pokemon
 					</p>
-					{loading && (
+					{pokedexLoading || pokemonsLoading && (
 						<div className="flex items-center gap-2 text-white/80">
 							<svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
 								<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -247,11 +235,11 @@ export default function Pokedex() {
 
 				{/* Pokemon Grid */}
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 max-w-7xl mx-auto">
-					{filteredPokemons.map((pokemon) => <PokemonItem pokemon={pokemon} isOwned={myPokemons.includes(pokemon.id)} />)}
+					{filteredPokemons.map((pokemon) => <PokemonItem pokemon={pokemon} isOwned={pokedex?.includes(pokemon.id)} />)}
 				</div>
 
 				{/* Empty State */}
-				{filteredPokemons.length === 0 && !loading && (
+				{filteredPokemons.length === 0 && !(pokemonsLoading || pokedexLoading) && (
 					<div className="text-center py-16 animate-fade-in">
 						<div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 max-w-md mx-auto">
 							<svg className="w-16 h-16 mx-auto text-white/60 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
