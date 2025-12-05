@@ -6,7 +6,8 @@ import {
 
 /**
  * Sync pending operations when back online
- * Returns the number of operations synced successfully
+ * @param {QueryClient} queryClient
+ * @return {Promise<number>}
  */
 export async function syncPendingOperations(queryClient) {
 	const pendingOps = await getPendingOperations();
@@ -27,7 +28,6 @@ export async function syncPendingOperations(queryClient) {
 		} catch (error) {
 			console.error(`Failed to sync operation ${operation.id}:`, error);
 
-			// Increment retry count
 			const retryCount = operation.retryCount + 1;
 			const maxRetries = 5;
 
@@ -37,13 +37,11 @@ export async function syncPendingOperations(queryClient) {
 				);
 				await removeOperation(operation.id);
 			} else {
-				// Update retry count
 				await db.pendingOperations.update(operation.id, { retryCount });
 			}
 		}
 	}
 
-	// Invalidate all queries to refetch latest data
 	if (successCount > 0 && queryClient) {
 		await queryClient.invalidateQueries();
 	}
@@ -57,17 +55,13 @@ export async function syncPendingOperations(queryClient) {
 /**
  * Process a single pending operation
  * TODO: replace by hooks
+ * @param {object} operation
+ * @return {Promise<void>}
  * */
 async function processPendingOperation(operation) {
 	switch (operation.type) {
 		case "catch_pokemon":
 			return await addPokemonToPokedex(
-				operation.data.userId,
-				operation.data.pokemonId
-			);
-
-		case "release_pokemon":
-			return await removePokemonFromPokedex(
 				operation.data.userId,
 				operation.data.pokemonId
 			);
@@ -79,16 +73,15 @@ async function processPendingOperation(operation) {
 
 /**
  * Setup online/offline event listeners
- * Automatically syncs when connection is restored
+ * @param {QueryClient} queryClient
+ * @returns {function} cleanup function to remove listeners
  */
 export function setupOnlineSync(queryClient) {
 	const handleOnline = async () => {
-		// Wait a bit to ensure connection is stable
 		setTimeout(async () => {
 			try {
 				await syncPendingOperations(queryClient);
 
-				// Refetch all active queries
 				await queryClient.refetchQueries({ type: "active" });
 			} catch (error) {
 				console.error("Error during online sync:", error);
@@ -100,11 +93,9 @@ export function setupOnlineSync(queryClient) {
 		console.log("Connection lost, entering offline mode");
 	};
 
-	// Add event listeners
 	window.addEventListener("online", handleOnline);
 	window.addEventListener("offline", handleOffline);
 
-	// Return cleanup function
 	return () => {
 		window.removeEventListener("online", handleOnline);
 		window.removeEventListener("offline", handleOffline);
@@ -113,6 +104,7 @@ export function setupOnlineSync(queryClient) {
 
 /**
  * Check connection status and return badge info
+ * @return {{isOnline: boolean, status: string, label: string}}
  */
 export function getConnectionStatus() {
 	return {
