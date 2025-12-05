@@ -3,9 +3,10 @@ import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import supabase from "../utils/supabase";
 import { getPokemons, getUserPokedex, isPokemonInPokedex } from "@/utils/pokedex";
 import { useAuth } from "@/context/AuthContext";
+import { AnimatedOrbs } from "@/components/animated-orbs";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 
@@ -60,7 +61,6 @@ function PokemonItem({ pokemon, isOwned }) {
 		<Card
 			key={pokemon.id}
 			className={`bg-linear-to-br ${typeColors[pokemon.types?.[0]] || "from-gray-400 to-gray-500"} border-white/20 hover:scale-105 transition-all duration-300 cursor-pointer hover:shadow-2xl animate-fade-in-up group`}
-
 		>
 			<CardHeader className="pb-0 pt-3 px-3">
 				<div className="text-white/60 text-xs font-bold">#{String(pokemon.id).padStart(3, "0")}</div>
@@ -103,37 +103,31 @@ function PokemonItem({ pokemon, isOwned }) {
 export default function Pokedex() {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState("");
-	const [pokemons, setPokemons] = useState([]);
-	const [userPokemons, setUserPokemons] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [selectedType, setSelectedType] = useState("All");
+	const [selectedOwned, setSelectedOwned] = useState(true);
 	const [myPokemons, setMyPokemons] = useState([]);
 	const [allPokemons, setAllPokemons] = useState([]);
 	const { user } = useAuth();
 
 	// Fetch pokemons from database
 	useEffect(() => {
-
-
 		async function initPokedex() {
 			const pokedex = await getUserPokedex(user.id);
 			const pokemons = await getPokemons();
-
 			setAllPokemons(pokemons);
 			setMyPokemons(pokedex);
-
+			setLoading(false);
 		}
-
 		initPokedex();
-
-
 	}, []);
 
 	// Filter pokemons based on search term and selected type state
 	const filteredPokemons = allPokemons.filter((pokemon) => {
 		const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
 		const matchesType = selectedType === "All" || pokemon.types?.includes(selectedType);
-		return matchesSearch && matchesType;
+		const matchesOwned = selectedOwned ? myPokemons.includes(pokemon.id) : true;
+		return matchesSearch && matchesType && matchesOwned;
 	});
 
 	// Get unique types for filter
@@ -142,12 +136,7 @@ export default function Pokedex() {
 	return (
 		<div className="min-h-screen bg-linear-to-br from-green-500 via-teal-600 to-blue-600 relative overflow-hidden">
 			{/* Animated background orbs - hidden on mobile for performance */}
-			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none hidden sm:block">
-				<div className="absolute top-10 left-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-				<div className="absolute top-20 right-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-				<div className="absolute bottom-10 left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-				<div className="absolute bottom-40 right-40 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-6000"></div>
-			</div>
+			<AnimatedOrbs />
 
 			{/* Main Content */}
 			<div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -155,7 +144,7 @@ export default function Pokedex() {
 				<div className="text-center mb-8 sm:mb-12 animate-fade-in">
 					<Button
 						variant="ghost"
-						className="absolute top-4 left-4 sm:top-8 sm:left-8 text-white hover:bg-white/20"
+						className="absolute top-4 left-4 sm:top-8 sm:left-8 text-white hover:bg-white/20 z-50"
 						onClick={() => navigate("/")}
 					>
 						<svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,6 +193,22 @@ export default function Pokedex() {
 
 							{/* Type Filter */}
 							<div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+								<Button
+									key={"Owned"}
+									variant={selectedOwned ? "default" : "outline"}
+									size="sm"
+									className={`whitespace-nowrap rounded-full ${selectedOwned
+										? "bg-white text-gray-800 hover:bg-white/90"
+										: "bg-white/10 text-white border-white/30 hover:bg-white/20"
+										}`}
+									onClick={() => setSelectedOwned(!selectedOwned)}
+								>
+									<Checkbox
+										checked={selectedOwned}
+										className="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft"
+									/>
+									Owned
+								</Button>
 								{["All", "Fire", "Water", "Grass", "Electric", "Psychic"].map((type) => (
 									<Button
 										key={type}

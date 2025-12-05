@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "../context/AuthContext";
+import { AnimatedOrbs } from "@/components/animated-orbs";
 
 export default function Home() {
 	const navigate = useNavigate();
@@ -12,17 +13,13 @@ export default function Home() {
 		await signOut();
 	};
 
+
 	return (
 		<div className="min-h-screen bg-linear-to-br from-red-500 via-purple-600 to-blue-600 relative overflow-hidden">
 			{/* Animated background orbs - hidden on mobile for performance */}
-			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none hidden sm:block">
-				<div className="absolute top-10 left-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-				<div className="absolute top-20 right-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-				<div className="absolute bottom-10 left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-			</div>
-
+			<AnimatedOrbs />
 			{/* Main Content */}
-			<div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+			<div className="relative z-10 container mx-auto px-4 sm:px-0 lg:px-0 py-8 sm:py-12 lg:py-16">
 				{/* Hero Section */}
 				<div className="text-center mb-12 sm:mb-16 lg:mb-20">
 					<div className="mb-6 sm:mb-8 animate-fade-in">
@@ -40,7 +37,7 @@ export default function Home() {
 					</div>
 
 					{user ? (
-						<div className="flex flex-col items-center gap-4 animate-fade-in animation-delay-300 px-4">
+						<div className="flex flex-col items-center gap-4 animate-fade-in animation-delay-300 px-0">
 							{/* User Info Card */}
 							<div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl p-4 sm:p-6 shadow-xl">
 								<div className="flex items-center gap-3 sm:gap-4">
