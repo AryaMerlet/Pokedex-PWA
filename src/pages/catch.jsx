@@ -8,6 +8,7 @@ import {
 	usePokedex,
 } from "@/hooks/usePokemons";
 import { useAuth } from "@/context/AuthContext";
+import { AnimatedOrbs } from "@/components/animated-orbs";
 
 export default function Catch() {
 	const navigate = useNavigate();
@@ -62,34 +63,36 @@ export default function Catch() {
 	};
 
 	return (
-		<div className="min-h-screen bg-linear-to-br from-red-500 via-purple-600 to-blue-600 relative overflow-hidden">
-			{/* Animated background orbs - hidden on mobile for performance */}
-			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none hidden sm:block">
-				<div className="absolute top-10 left-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-				<div className="absolute top-20 right-10 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-				<div className="absolute bottom-10 left-20 w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-			</div>
+		<div className="min-h-screen bg-pixel-dark relative overflow-hidden">
+			{/* 8-bit Background Pattern */}
+			<div className="absolute inset-0 pixel-bg-pattern opacity-50"></div>
+
+			{/* Animated pixel blocks */}
+			<AnimatedOrbs />
+
+			{/* Scanline effect */}
+			<div className="absolute inset-0 scanlines pointer-events-none"></div>
 
 			{/* Main Content */}
 			<div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
 				{/* Header */}
 				<div className="text-center mb-8 sm:mb-12">
-					<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 sm:mb-4 drop-shadow-2xl tracking-tight">
-						Pokemon Draw
+					<h1 className="text-xl sm:text-2xl md:text-3xl font-pixel text-pixel-red mb-3 sm:mb-4 pixel-text-shadow">
+						POKEMON DRAW
 					</h1>
-					<p className="text-base sm:text-lg md:text-xl text-white/90 font-medium max-w-xl mx-auto">
+					<p className="text-[10px] sm:text-xs text-white font-pixel max-w-xl mx-auto">
 						{revealed
-							? "You found a new Pokemon! It's been added to your Pokedex."
-							: "A mystery Pokemon awaits! Tap to reveal your catch!"}
+							? "A WILD POKEMON APPEARED!"
+							: "WHO'S THAT POKEMON?"}
 					</p>
 				</div>
 
 				{/* Pokemon Card */}
 				<div className="max-w-md mx-auto mb-8">
-					<Card className="bg-white/10 backdrop-blur-lg border-white/20 overflow-hidden">
+					<Card className="bg-pixel-red">
 						<CardHeader className="text-center pb-2">
-							<CardTitle className="text-xl sm:text-2xl font-bold text-white capitalize">
-								{loading ? "Drawing..." : revealed ? pokemon?.name : "???"}
+							<CardTitle className="text-white uppercase">
+								{loading ? "LOADING..." : revealed ? pokemon?.name : "???"}
 							</CardTitle>
 						</CardHeader>
 						<CardContent className="flex flex-col items-center">
@@ -97,10 +100,10 @@ export default function Catch() {
 							<div className="relative w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 mb-4">
 								{loading ? (
 									<div className="w-full h-full flex items-center justify-center">
-										<div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+										<div className="pixel-loader"></div>
 									</div>
 								) : (
-									<div className="relative w-full h-full bg-white/30 rounded-2xl py-4">
+									<div className="relative w-full h-full bg-white/20 border-4 border-foreground p-4">
 										{/* Hidden silhouette or revealed Pokemon */}
 										<img
 											src={
@@ -111,17 +114,16 @@ export default function Catch() {
 												pokemon?.sprites?.front_default ||
 												`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png`
 											}
-											alt={revealed ? pokemon?.name : "Mystery Pokemon"}
-											className={`w-full h-full object-contain drop-shadow-2xl transition-all duration-700 ${
-												revealed
-													? "filter-none scale-100 opacity-100"
-													: "brightness-0 scale-90 opacity-80"
-											}`}
+											alt={revealed ? pokemon?.name : "???"}
+											className={`w-full h-full object-contain pixel-img transition-all duration-500 ${revealed
+												? "filter-none scale-100 opacity-100"
+												: "brightness-0 scale-90 opacity-80"
+												}`}
 										/>
 										{/* Question mark overlay when hidden */}
 										{!revealed && (
 											<div className="absolute inset-0 flex items-center justify-center">
-												<span className="text-6xl sm:text-7xl lg:text-8xl font-black text-white/50 animate-pulse">
+												<span className="text-6xl sm:text-7xl font-pixel text-white/50 pixel-blink">
 													?
 												</span>
 											</div>
@@ -132,32 +134,24 @@ export default function Catch() {
 
 							{/* Pokemon Stats - only show when revealed */}
 							{!loading && pokemon && revealed && pokemon?.stats && (
-								<div className="flex gap-4 mb-4 text-white/80 text-sm sm:text-base">
-									<span>HP: {pokemon.stats[0]?.base_stat || "?"}</span>
-									<span>•</span>
-									<span>ATK: {pokemon.stats[1]?.base_stat || "?"}</span>
-									<span>•</span>
-									<span>DEF: {pokemon.stats[2]?.base_stat || "?"}</span>
+								<div className="flex gap-4 mb-4 text-white text-[10px] font-pixel">
+									<span>HP:{pokemon.stats[0]?.base_stat || "?"}</span>
+									<span>ATK:{pokemon.stats[1]?.base_stat || "?"}</span>
+									<span>DEF:{pokemon.stats[2]?.base_stat || "?"}</span>
 								</div>
 							)}
 
 							{/* Added to Pokedex Message */}
 							{revealed && pokemon && (
-								<div className="text-lg sm:text-xl font-bold mb-4 text-green-400">
+								<div className="text-sm font-pixel mb-4 text-center">
 									{catchMutation.isSuccess ? (
-										<>
-											🎉{" "}
-											{pokemon.name.charAt(0).toUpperCase() +
-												pokemon.name.slice(1)}{" "}
-											added to your Pokedex!
-										</>
+										<span className="text-pixel-yellow">
+											★ {pokemon.name.toUpperCase()} CAUGHT! ★
+										</span>
 									) : isAlreadyCaught ? (
-										<>
-											🔄{" "}
-											{pokemon.name.charAt(0).toUpperCase() +
-												pokemon.name.slice(1)}{" "}
-											was already in your Pokedex!
-										</>
+										<span className="text-pixel-yellow">
+											↻ ALREADY IN POKEDEX
+										</span>
 									) : null}
 								</div>
 							)}
@@ -166,20 +160,18 @@ export default function Catch() {
 							<div className="flex flex-col gap-3 w-full">
 								{!revealed ? (
 									<Button
-										className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-base sm:text-lg py-5 sm:py-6 rounded-full shadow-xl hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
+										className="w-full bg-pixel-red text-white font-pixel text-xs"
 										onClick={revealPokemon}
 										disabled={loading}
 									>
-										<span className="flex items-center justify-center gap-2">
-											✨ Reveal Pokemon!
-										</span>
+										✨ REVEAL! ✨
 									</Button>
 								) : (
 									<Button
-										className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-base sm:text-lg py-5 sm:py-6 rounded-full shadow-xl hover:scale-105 transition-transform"
+										className="w-full bg-pixel-blue text-white font-pixel text-xs"
 										onClick={drawAgain}
 									>
-										🔄 Draw Again (Testing)
+										DRAW AGAIN
 									</Button>
 								)}
 							</div>
@@ -191,44 +183,20 @@ export default function Catch() {
 				<div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-md mx-auto">
 					<Button
 						variant="outline"
-						className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30 font-semibold px-6 py-5 rounded-full"
+						className="w-full sm:w-auto bg-transparent text-white font-pixel text-[10px] px-6 border-white"
 						onClick={() => navigate("/")}
 					>
-						← Back Home
+						← HOME
 					</Button>
 					<Button
 						variant="outline"
-						className="w-full sm:w-auto bg-white/20 backdrop-blur-sm text-white border-white/40 hover:bg-white/30 font-semibold px-6 py-5 rounded-full"
+						className="w-full sm:w-auto bg-transparent text-white font-pixel text-[10px] px-6 border-white"
 						onClick={() => navigate("/pokedex")}
 					>
-						View Pokedex →
+						POKEDEX →
 					</Button>
 				</div>
 			</div>
-
-			<style jsx>{`
-				@keyframes blob {
-					0%,
-					100% {
-						transform: translate(0px, 0px) scale(1);
-					}
-					33% {
-						transform: translate(30px, -50px) scale(1.1);
-					}
-					66% {
-						transform: translate(-20px, 20px) scale(0.9);
-					}
-				}
-				.animate-blob {
-					animation: blob 7s infinite;
-				}
-				.animation-delay-2000 {
-					animation-delay: 2s;
-				}
-				.animation-delay-4000 {
-					animation-delay: 4s;
-				}
-			`}</style>
 		</div>
 	);
 }

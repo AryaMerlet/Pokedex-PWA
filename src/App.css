@@ -5,41 +5,276 @@
   padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+/* 8-bit Background Pattern */
+.pixel-bg-pattern {
+  background-color: #0f0f23;
+  background-image:
+    linear-gradient(45deg, #1a1a3e 25%, transparent 25%),
+    linear-gradient(-45deg, #1a1a3e 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1a1a3e 75%),
+    linear-gradient(-45deg, transparent 75%, #1a1a3e 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+/* Gradient backgrounds in 8-bit style (stepped gradients) */
+.pixel-gradient-red {
+  background: linear-gradient(180deg,
+      #e8341c 0%, #e8341c 33%,
+      #c42010 33%, #c42010 66%,
+      #8f1808 66%, #8f1808 100%);
 }
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.pixel-gradient-blue {
+  background: linear-gradient(180deg,
+      #0058f8 0%, #0058f8 33%,
+      #0040c8 33%, #0040c8 66%,
+      #002898 66%, #002898 100%);
 }
 
-@keyframes logo-spin {
-  from {
+.pixel-gradient-green {
+  background: linear-gradient(180deg,
+      #8bac0f 0%, #8bac0f 33%,
+      #306230 33%, #306230 66%,
+      #1a3a1a 66%, #1a3a1a 100%);
+}
+
+.pixel-gradient-purple {
+  background: linear-gradient(180deg,
+      #9c3fce 0%, #9c3fce 33%,
+      #7030a0 33%, #7030a0 66%,
+      #502070 66%, #502070 100%);
+}
+
+/* 8-bit animations */
+@keyframes pixel-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pixel-shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes pixel-spin {
+  0% {
     transform: rotate(0deg);
   }
 
-  to {
+  25% {
+    transform: rotate(90deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+  }
+
+  100% {
     transform: rotate(360deg);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Floating pixel blocks animation */
+@keyframes pixel-block-float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(10px, -20px) rotate(90deg);
+  }
+
+  50% {
+    transform: translate(0, -30px) rotate(180deg);
+  }
+
+  75% {
+    transform: translate(-10px, -20px) rotate(270deg);
   }
 }
 
-.card {
-  padding: 2em;
+.animate-pixel-float-1 {
+  animation: pixel-block-float 4s steps(8) infinite;
 }
 
-.read-the-docs {
-  color: #888;
+.animate-pixel-float-2 {
+  animation: pixel-block-float 5s steps(8) infinite;
+  animation-delay: 1s;
+}
+
+.animate-pixel-float-3 {
+  animation: pixel-block-float 6s steps(8) infinite;
+  animation-delay: 2s;
+}
+
+/* Card styles in 8-bit */
+.pixel-card {
+  background: var(--card);
+  border: 4px solid var(--foreground);
+  box-shadow: 6px 6px 0 0 var(--foreground);
+  padding: 1rem;
+}
+
+.pixel-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--foreground);
+}
+
+/* CRT screen effect */
+.crt-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Pixelated image rendering */
+.pixel-img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Remove blur effects for 8-bit aesthetic */
+.no-blur {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Pokemon type colors - 8-bit palette */
+.type-normal {
+  background-color: #a8a878;
+}
+
+.type-fire {
+  background-color: #f08030;
+}
+
+.type-water {
+  background-color: #6890f0;
+}
+
+.type-electric {
+  background-color: #f8d030;
+}
+
+.type-grass {
+  background-color: #78c850;
+}
+
+.type-ice {
+  background-color: #98d8d8;
+}
+
+.type-fighting {
+  background-color: #c03028;
+}
+
+.type-poison {
+  background-color: #a040a0;
+}
+
+.type-ground {
+  background-color: #e0c068;
+}
+
+.type-flying {
+  background-color: #a890f0;
+}
+
+.type-psychic {
+  background-color: #f85888;
+}
+
+.type-bug {
+  background-color: #a8b820;
+}
+
+.type-rock {
+  background-color: #b8a038;
+}
+
+.type-ghost {
+  background-color: #705898;
+}
+
+.type-dragon {
+  background-color: #7038f8;
+}
+
+.type-dark {
+  background-color: #705848;
+}
+
+.type-steel {
+  background-color: #b8b8d0;
+}
+
+.type-fairy {
+  background-color: #ee99ac;
+}
+
+/* Loading spinner - 8-bit style */
+@keyframes pixel-loading {
+  0% {
+    content: '⬛';
+  }
+
+  25% {
+    content: '⬜';
+  }
+
+  50% {
+    content: '⬛';
+  }
+
+  75% {
+    content: '⬜';
+  }
+}
+
+.pixel-loader {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #1a1a2e;
+  border-top-color: #8bac0f;
+  animation: pixel-spin 1s steps(4) infinite;
 }

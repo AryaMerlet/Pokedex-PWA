@@ -3,11 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* 8-bit / Pixel Art Theme */
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  /* 8-bit Font */
+  --font-pixel: 'Press Start 2P', monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -41,80 +46,274 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Pokemon Brand Light Theme */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.147 0.004 49.25);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.147 0.004 49.25);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.216 0.006 56.043);
-  --primary-foreground: oklch(0.985 0.001 106.423);
-  --secondary: oklch(0.97 0.001 106.424);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.97 0.001 106.424);
-  --muted-foreground: oklch(0.553 0.013 58.071);
-  --accent: oklch(0.97 0.001 106.424);
-  --accent-foreground: oklch(0.216 0.006 56.043);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.923 0.003 48.717);
-  --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.709 0.01 56.259);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0.001 106.423);
-  --sidebar-foreground: oklch(0.147 0.004 49.25);
-  --sidebar-primary: oklch(0.216 0.006 56.043);
-  --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
-  --sidebar-accent: oklch(0.97 0.001 106.424);
-  --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-  --sidebar-border: oklch(0.923 0.003 48.717);
-  --sidebar-ring: oklch(0.709 0.01 56.259);
+  --radius: 0px;
+
+  /* Classic Pokemon palette */
+  --background: #f0f0f0;
+  --foreground: #1d1d1d;
+  --card: #ffffff;
+  --card-foreground: #1d1d1d;
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1d;
+  --primary: #CC0000;
+  --primary-foreground: #ffffff;
+  --secondary: #3B4CCA;
+  --secondary-foreground: #ffffff;
+  --muted: #e0e0e0;
+  --muted-foreground: #666666;
+  --accent: #FFCB05;
+  --accent-foreground: #1d1d1d;
+  --destructive: #CC0000;
+  --border: #1d1d1d;
+  --input: #1d1d1d;
+  --ring: #CC0000;
+  --chart-1: #CC0000;
+  --chart-2: #3B4CCA;
+  --chart-3: #FFCB05;
+  --chart-4: #4DAD5B;
+  --chart-5: #A040A0;
+  --sidebar: #d0d0b8;
+  --sidebar-foreground: #1a1a2e;
+  --sidebar-primary: #306230;
+  --sidebar-primary-foreground: #e8e8d0;
+  --sidebar-accent: #8bac0f;
+  --sidebar-accent-foreground: #1a1a2e;
+  --sidebar-border: #1a1a2e;
+  --sidebar-ring: #306230;
 }
 
+/* Pokemon Brand Dark Theme */
 .dark {
-  --background: oklch(0.147 0.004 49.25);
-  --foreground: oklch(0.985 0.001 106.423);
-  --card: oklch(0.216 0.006 56.043);
-  --card-foreground: oklch(0.985 0.001 106.423);
-  --popover: oklch(0.216 0.006 56.043);
-  --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: oklch(0.923 0.003 48.717);
-  --primary-foreground: oklch(0.216 0.006 56.043);
-  --secondary: oklch(0.268 0.007 34.298);
-  --secondary-foreground: oklch(0.985 0.001 106.423);
-  --muted: oklch(0.268 0.007 34.298);
-  --muted-foreground: oklch(0.709 0.01 56.259);
-  --accent: oklch(0.268 0.007 34.298);
-  --accent-foreground: oklch(0.985 0.001 106.423);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.553 0.013 58.071);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.216 0.006 56.043);
-  --sidebar-foreground: oklch(0.985 0.001 106.423);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
-  --sidebar-accent: oklch(0.268 0.007 34.298);
-  --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.553 0.013 58.071);
+  --background: #1a1a2e;
+  --foreground: #f5f5f5;
+  --card: #2d2d44;
+  --card-foreground: #f5f5f5;
+  --popover: #2d2d44;
+  --popover-foreground: #f5f5f5;
+  --primary: #FF0000;
+  --primary-foreground: #ffffff;
+  --secondary: #3B4CCA;
+  --secondary-foreground: #ffffff;
+  --muted: #3d3d5c;
+  --muted-foreground: #a0a0b0;
+  --accent: #FFCB05;
+  --accent-foreground: #1d1d1d;
+  --destructive: #FF0000;
+  --border: #4a4a6e;
+  --input: #4a4a6e;
+  --ring: #FF0000;
+  --chart-1: #FF0000;
+  --chart-2: #3B4CCA;
+  --chart-3: #FFCB05;
+  --chart-4: #4DAD5B;
+  --chart-5: #A040A0;
+  --sidebar: #2d2d44;
+  --sidebar-foreground: #f5f5f5;
+  --sidebar-primary: #FF0000;
+  --sidebar-primary-foreground: #0f0f23;
+  --sidebar-accent: #306230;
+  --sidebar-accent-foreground: #f0f0f0;
+  --sidebar-border: #4a4a6e;
+  --sidebar-ring: #8bac0f;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    image-rendering: pixelated;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: 'Press Start 2P', monospace;
+  }
+}
+
+/* 8-bit Utility Classes */
+@layer utilities {
+
+  /* Pixel border styles */
+  .pixel-border {
+    border: 4px solid var(--foreground);
+    box-shadow:
+      4px 4px 0 0 var(--foreground);
+  }
+
+  .pixel-border-sm {
+    border: 2px solid var(--foreground);
+    box-shadow:
+      2px 2px 0 0 var(--foreground);
+  }
+
+  .pixel-border-white {
+    border: 4px solid #ffffff;
+    box-shadow:
+      4px 4px 0 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* Pixel button press effect */
+  .pixel-btn {
+    border: 4px solid var(--foreground);
+    box-shadow: 4px 4px 0 0 var(--foreground);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .pixel-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 var(--foreground);
+  }
+
+  .pixel-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
+
+  /* Pixel inset effect */
+  .pixel-inset {
+    border: 4px solid var(--foreground);
+    box-shadow:
+      inset 4px 4px 0 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* Scanline effect */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px);
+    pointer-events: none;
+  }
+
+  /* Pokemon color palette utilities */
+  .bg-pixel-red {
+    background-color: #CC0000;
+  }
+
+  .bg-pixel-blue {
+    background-color: #3B4CCA;
+  }
+
+  .bg-pixel-green {
+    background-color: #4DAD5B;
+  }
+
+  .bg-pixel-lime {
+    background-color: #FFCB05;
+  }
+
+  .bg-pixel-yellow {
+    background-color: #FFCB05;
+  }
+
+  .bg-pixel-purple {
+    background-color: #A040A0;
+  }
+
+  .bg-pixel-dark {
+    background-color: #1a1a2e;
+  }
+
+  .bg-pixel-light {
+    background-color: #f0f0f0;
+  }
+
+  .text-pixel-red {
+    color: #CC0000;
+  }
+
+  .text-pixel-blue {
+    color: #3B4CCA;
+  }
+
+  .text-pixel-green {
+    color: #4DAD5B;
+  }
+
+  .text-pixel-lime {
+    color: #FFCB05;
+  }
+
+  .text-pixel-yellow {
+    color: #FFCB05;
+  }
+
+  .text-pixel-purple {
+    color: #A040A0;
+  }
+
+  /* Pixel text shadow */
+  .pixel-text-shadow {
+    text-shadow: 2px 2px 0 #000000;
+  }
+
+  /* Font sizing adjustments for pixel font (it runs small) */
+  .font-pixel {
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  /* Blink animation for 8-bit feel */
+  .pixel-blink {
+    animation: pixel-blink 1s steps(1) infinite;
+  }
+
+  @keyframes pixel-blink {
+
+    0%,
+    50% {
+      opacity: 1;
+    }
+
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Pixel bounce */
+  .pixel-bounce {
+    animation: pixel-bounce 0.5s steps(4) infinite;
+  }
+
+  @keyframes pixel-bounce {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  /* Floating pixel animation */
+  .pixel-float {
+    animation: pixel-float 2s steps(8) infinite;
+  }
+
+  @keyframes pixel-float {
+
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+
+    25% {
+      transform: translate(4px, -4px);
+    }
+
+    50% {
+      transform: translate(0, -8px);
+    }
+
+    75% {
+      transform: translate(-4px, -4px);
+    }
   }
 }
