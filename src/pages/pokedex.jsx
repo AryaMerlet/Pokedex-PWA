@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { getPokemons, getUserPokedex, isPokemonInPokedex } from "@/utils/pokedex";
 import { useAuth } from "@/context/AuthContext";
 import { AnimatedOrbs } from "@/components/animated-orbs";
 import { Checkbox } from "@/components/ui/checkbox";
-import { usePokedex, usePokemons } from "@/hooks/usePokemons";
+import { usePokedex, usePokemons, useAllPokemonTypes } from "@/hooks/usePokemons";
 
 
 
@@ -107,9 +106,31 @@ export default function Pokedex() {
 	const { user } = useAuth();
 	const { data: pokedex, isLoading: pokedexLoading } = usePokedex(user.id);
 	const { data: pokemons, isLoading: pokemonsLoading } = usePokemons();
+	const { data: allTypes, isLoading: typesLoading } = useAllPokemonTypes();
+
+	// Merge types into pokemons (group types by pokemon_id)
+	const pokemonsWithTypes = useMemo(() => {
+		if (!pokemons || !allTypes) return pokemons || [];
+
+		// Group types by pokemon_id
+		const typesByPokemonId = allTypes.reduce((acc, typeEntry) => {
+			const id = typeEntry.pokemon_id;
+			if (!acc[id]) acc[id] = [];
+			// Capitalize first letter for display
+			const typeName = typeEntry.type_name.charAt(0).toUpperCase() + typeEntry.type_name.slice(1);
+			acc[id].push(typeName);
+			return acc;
+		}, {});
+
+		// Merge types into pokemons
+		return pokemons.map(pokemon => ({
+			...pokemon,
+			types: typesByPokemonId[pokemon.id] || []
+		}));
+	}, [pokemons, allTypes]);
 
 	// Filter pokemons based on search term and selected type state
-	const filteredPokemons = pokemons?.filter((pokemon) => {
+	const filteredPokemons = pokemonsWithTypes?.filter((pokemon) => {
 		const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
 		const matchesType = selectedType === "All" || pokemon.types?.includes(selectedType);
 		const matchesOwned = selectedOwned ? pokedex?.includes(pokemon.id) : true;
@@ -117,7 +138,7 @@ export default function Pokedex() {
 	});
 
 	// Get unique types for filter
-	const allTypes = ["All", ...Object.keys(typeColors)];
+	const typeFilterOptions = ["All", ...Object.keys(typeColors)];
 
 	return (
 		<div className="min-h-screen bg-pixel-dark relative overflow-hidden">
@@ -189,7 +210,7 @@ export default function Pokedex() {
 									/>
 									OWNED
 								</div>
-								{["All", "Fire", "Water", "Grass", "Electric", "Psychic"].map((type) => (
+								{typeFilterOptions.map((type) => (
 									<Button
 										key={type}
 										variant={selectedType === type ? "default" : "outline"}
@@ -199,7 +220,6 @@ export default function Pokedex() {
 											: "bg-pixel-dark text-white"
 											}`}
 										onClick={() => setSelectedType(type)}
-										disabled={type === "All" ? false : true}
 									>
 										{type.slice(0, 4)}
 									</Button>

@@ -5,6 +5,10 @@ import {
 	addPokemonToPokedex,
 	isPokemonInPokedex,
 	getPokemonById,
+	getPokemonStats,
+	getPokemonTypes,
+	getAllPokemonStats,
+	getAllPokemonTypes,
 } from "../utils/pokedex";
 import { queueOperation } from "../lib/offlineDb";
 
@@ -119,3 +123,72 @@ export function useIsPokemonInPokedex(userId, pokemonId) {
 		retry: 3,
 	});
 }
+
+// ==================== POKEMON STATS ====================
+
+/**
+ * Hook to fetch stats for a specific pokemon
+ * @param {number} pokemonId
+ * @return {Array<{ stat_name: string, base_stat: number }>}
+ */
+export function usePokemonStats(pokemonId) {
+	return useQuery({
+		queryKey: ["pokemonStats", pokemonId],
+		queryFn: () => getPokemonStats(pokemonId),
+		enabled: !!pokemonId,
+		staleTime: 1000 * 60 * 60, // 1 hour (stats don't change often)
+		gcTime: 1000 * 60 * 60 * 24, // 24 hours
+		networkMode: "offlineFirst",
+		retry: 3,
+	});
+}
+
+/**
+ * Hook to fetch all pokemon stats
+ * @return {Array<{ pokemon_id: number, stat_name: string, base_stat: number }>}
+ */
+export function useAllPokemonStats() {
+	return useQuery({
+		queryKey: ["allPokemonStats"],
+		queryFn: getAllPokemonStats,
+		staleTime: 1000 * 60 * 60, // 1 hour
+		gcTime: 1000 * 60 * 60 * 24, // 24 hours
+		networkMode: "offlineFirst",
+		retry: 3,
+	});
+}
+
+// ==================== POKEMON TYPES ====================
+
+/**
+ * Hook to fetch types for a specific pokemon
+ * @param {number} pokemonId
+ * @return {Array<{ type_name: string, slot: number }>}
+ */
+export function usePokemonTypes(pokemonId) {
+	return useQuery({
+		queryKey: ["pokemonTypes", pokemonId],
+		queryFn: () => getPokemonTypes(pokemonId),
+		enabled: !!pokemonId,
+		staleTime: 1000 * 60 * 60, // 1 hour (types don't change)
+		gcTime: 1000 * 60 * 60 * 24, // 24 hours
+		networkMode: "offlineFirst",
+		retry: 3,
+	});
+}
+
+/**
+ * Hook to fetch all pokemon types
+ * @return {Array<{ pokemon_id: number, type_name: string, slot: number }>}
+ */
+export function useAllPokemonTypes() {
+	return useQuery({
+		queryKey: ["allPokemonTypes"],
+		queryFn: getAllPokemonTypes,
+		staleTime: 1000 * 60 * 60, // 1 hour
+		gcTime: 1000 * 60 * 60 * 24, // 24 hours
+		networkMode: "offlineFirst",
+		retry: 3,
+	});
+}
+

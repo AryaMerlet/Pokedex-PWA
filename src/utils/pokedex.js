@@ -4,6 +4,12 @@ import {
 	getOfflinePokemons,
 	savePokedex,
 	getOfflinePokedex,
+	savePokemonStats,
+	getOfflinePokemonStats,
+	getAllOfflinePokemonStats,
+	savePokemonTypes,
+	getOfflinePokemonTypes,
+	getAllOfflinePokemonTypes,
 	isOnline,
 } from "../lib/offlineDb";
 
@@ -134,3 +140,124 @@ export const removePokemonFromPokedex = async (userId, pokemonId) => {
 	if (error) throw error;
 	return { success: true };
 };
+
+// ==================== POKEMON STATS ====================
+
+/**
+ * Get stats for a specific pokemon with offline support
+ * @param {number} pokemonId
+ * @returns {Promise<Array>} Array of { stat_name, base_stat }
+ */
+export const getPokemonStats = async (pokemonId) => {
+	try {
+		// If offline, get from cached data
+		if (!isOnline()) {
+			console.log("Offline: Loading pokemon stats from IndexedDB");
+			return await getOfflinePokemonStats(pokemonId);
+		}
+
+		// Fetch from Supabase
+		const { data, error } = await supabase
+			.from("pokemon_stats")
+			.select("*")
+			.eq("pokemon_id", pokemonId);
+		if (error) throw error;
+
+		// Save to IndexedDB for offline use
+		if (data.length > 0) {
+			await savePokemonStats(data);
+		}
+
+		return data;
+	} catch (error) {
+		console.error("Error fetching pokemon stats, falling back to offline:", error);
+		return await getOfflinePokemonStats(pokemonId);
+	}
+};
+
+/**
+ * Get all pokemon stats with offline support
+ * Saves to IndexedDB on success, falls back to cached data on error
+ */
+export const getAllPokemonStats = async () => {
+	try {
+		// If offline, return cached data immediately
+		if (!isOnline()) {
+			console.log("Offline: Loading all pokemon stats from IndexedDB");
+			return await getAllOfflinePokemonStats();
+		}
+
+		// Fetch from Supabase
+		const { data, error } = await supabase.from("pokemon_stats").select("*");
+		if (error) throw error;
+
+		// Save to IndexedDB for offline use
+		await savePokemonStats(data);
+
+		return data;
+	} catch (error) {
+		console.error("Error fetching all pokemon stats, falling back to offline:", error);
+		return await getAllOfflinePokemonStats();
+	}
+};
+
+// ==================== POKEMON TYPES ====================
+
+/**
+ * Get types for a specific pokemon with offline support
+ * @param {number} pokemonId
+ * @returns {Promise<Array>} Array of { type_name, slot }
+ */
+export const getPokemonTypes = async (pokemonId) => {
+	try {
+		// If offline, get from cached data
+		if (!isOnline()) {
+			console.log("Offline: Loading pokemon types from IndexedDB");
+			return await getOfflinePokemonTypes(pokemonId);
+		}
+
+		// Fetch from Supabase
+		const { data, error } = await supabase
+			.from("pokemon_types")
+			.select("*")
+			.eq("pokemon_id", pokemonId);
+		if (error) throw error;
+
+		// Save to IndexedDB for offline use
+		if (data.length > 0) {
+			await savePokemonTypes(data);
+		}
+
+		return data;
+	} catch (error) {
+		console.error("Error fetching pokemon types, falling back to offline:", error);
+		return await getOfflinePokemonTypes(pokemonId);
+	}
+};
+
+/**
+ * Get all pokemon types with offline support
+ * Saves to IndexedDB on success, falls back to cached data on error
+ */
+export const getAllPokemonTypes = async () => {
+	try {
+		// If offline, return cached data immediately
+		if (!isOnline()) {
+			console.log("Offline: Loading all pokemon types from IndexedDB");
+			return await getAllOfflinePokemonTypes();
+		}
+
+		// Fetch from Supabase
+		const { data, error } = await supabase.from("pokemon_types").select("*");
+		if (error) throw error;
+
+		// Save to IndexedDB for offline use
+		await savePokemonTypes(data);
+
+		return data;
+	} catch (error) {
+		console.error("Error fetching all pokemon types, falling back to offline:", error);
+		return await getAllOfflinePokemonTypes();
+	}
+};
+

@@ -6,9 +6,32 @@ import {
 	usePokemons,
 	useCatchPokemon,
 	usePokedex,
+	usePokemonTypes,
 } from "@/hooks/usePokemons";
 import { useAuth } from "@/context/AuthContext";
 import { AnimatedOrbs } from "@/components/animated-orbs";
+
+// Type badge colors - 8-bit palette
+const typeBadgeColors = {
+	normal: "bg-[#a8a878]",
+	fire: "bg-[#f08030]",
+	water: "bg-[#6890f0]",
+	electric: "bg-[#f8d030] text-gray-800",
+	grass: "bg-[#78c850]",
+	ice: "bg-[#98d8d8] text-gray-800",
+	fighting: "bg-[#c03028]",
+	poison: "bg-[#a040a0]",
+	ground: "bg-[#e0c068] text-gray-800",
+	flying: "bg-[#a890f0]",
+	psychic: "bg-[#f85888]",
+	bug: "bg-[#a8b820]",
+	rock: "bg-[#b8a038]",
+	ghost: "bg-[#705898]",
+	dragon: "bg-[#7038f8]",
+	dark: "bg-[#705848]",
+	steel: "bg-[#b8b8d0] text-gray-800",
+	fairy: "bg-[#ee99ac]",
+};
 
 export default function Catch() {
 	const navigate = useNavigate();
@@ -32,6 +55,9 @@ export default function Catch() {
 
 	// Check if already caught using cached pokedex data
 	const isAlreadyCaught = myPokedex?.includes(randomId);
+
+	// Fetch types for current pokemon
+	const { data: pokemonTypes } = usePokemonTypes(randomId);
 
 	// Reveal the Pokemon and add to Pokedex
 	const revealPokemon = async () => {
@@ -131,6 +157,20 @@ export default function Catch() {
 									</div>
 								)}
 							</div>
+
+							{/* Pokemon Types - only show when revealed */}
+							{!loading && pokemon && revealed && pokemonTypes && pokemonTypes.length > 0 && (
+								<div className="flex flex-wrap justify-center gap-2 mb-4">
+									{pokemonTypes.map((typeEntry) => (
+										<span
+											key={typeEntry.type_name}
+											className={`${typeBadgeColors[typeEntry.type_name] || "bg-gray-500"} text-white text-[10px] px-2 py-1 border-2 border-foreground font-pixel uppercase`}
+										>
+											{typeEntry.type_name}
+										</span>
+									))}
+								</div>
+							)}
 
 							{/* Pokemon Stats - only show when revealed */}
 							{!loading && pokemon && revealed && pokemon?.stats && (
